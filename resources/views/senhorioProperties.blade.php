@@ -96,7 +96,7 @@
                                             <h3>Metros quadrados: {{$propInfo['AreaMetros']}}</h3>
                                         </div>
                                     </div>
-                                    <br>
+                                    
                                 </div>
                                 @endforeach
 

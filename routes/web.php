@@ -29,6 +29,9 @@ $router->group(['prefix' => '/propriedades/'], function() use ($router){
     $router->delete('/', 'PropriedadesController@destroyAllPropriedades');
 });
 $router->group(['prefix' => '/propriedade/'], function() use ($router){
+    $router->get('/add', function ()  {
+        return view('senhorioAddProperty');
+    });
     $router->get('/{id}', 'PropriedadesController@getPropriedade');
     $router->post('/', 'PropriedadesController@storePropriedade');
     $router->put('/{id}', 'PropriedadesController@updatePropriedade');
