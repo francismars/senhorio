@@ -38,23 +38,57 @@
     </style>
 
 </head>
-
-<body>
-    
-    <!-- END Nav bar -->
-
-    <!-- Banner -->
-    <!-- <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center"> --> 
-
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
         <div class="container">
-            <form method="post" action="/propriedade/" enctype="multipart/form-data">
-            <div class="row">
-                    <div class="form-group col-md-2">
-                        <label for="idSenhorio">Id Senhorio:</label>
-                        <input type="text" class="form-control" id="idSenhorio" name="idSenhorio" value="1" readonly>
-                    </div>
-                    </div>
+            <a class="navbar-brand" href="#">
+                <img src="/img/logo/UniRent-V2.png" alt="" width="100">
+            </a>
+            <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mx-auto"></div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-black text-end" href="{{ url('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black text-end" >Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black text-end" >Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black text-end" >Wallet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black text-end" >Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- END Nav bar -->
+
+<!-- Banner -->
+<div class="banner-image d-flex justify-content-center align-items-center pt-5">
+    <div class="container profile-container m-5">
+        <div class="content text-center">
+        <h1>Adicionar Propriedade</h1>
+        </div>
+        <div class="content text-left">
+	        <form method="post" action="/propriedade/" enctype="multipart/form-data">
                 <div class="row">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="hidden" class="form-control" id="idSenhorio" name="idSenhorio" value="1" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+                    </div>
                     <div class="col-2">
                         <label for="inputtipo">Tipo de Propriedade:</label>
                         <select id="inputtipo" name="inputtipo" class="form-control">
@@ -64,37 +98,43 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="inputEndereco">Endereço:</label>
                         <input type="text" class="form-control" id="inputEndereco" placeholder="Rua da Prata, 1100 Lisboa, Portugal">
                     </div>
-                    <button type="button" id="geocodeSubmit">Geocode</button>
-                    <div id="map"></div>
-                    <div class="row">
+                    <div class="form-group col-md-4">
+                        <br>
+                        <button type="button" class="btn btn-primary" id="geocodeSubmit">Confirmar</button>
+                    </div>  
+                </div>        
+                <div class="row">
                     <div class="form-group col-md-2">
-                        <label for="inputLatitude">Latitude:</label>
-                        <input type="text" class="form-control" id="inputLatitude" name="inputLatitude" value="" readonly>
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="inputLongitude">Longitude:</label>
-                        <input type="text" class="form-control" id="inputLongitude" name="inputLongitude" value="" readonly>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="inputLocalizacao">Localizacao:</label>
-                        <input type="text" class="form-control" id="inputLocalizacao" name="inputLocalizacao" value="" readonly>
+                        <input type="hidden" class="form-control" id="inputLatitude" name="inputLatitude" value="" readonly>
                     </div>
+                    <div class="form-group col-md-2">
+                        <input type="hidden" class="form-control" id="inputLongitude" name="inputLongitude" value="" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="hidden" class="form-control" id="inputLocalizacao" name="inputLocalizacao" value="" readonly>               
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-8">
                         <label for="inputDescricao">Descrição:</label>
                         <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" placeholder="Descrição">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-2">
-                        <label for="inputQuartos">Numero de Quartos:</label>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputQuartos">Número de Quartos:</label>
                         <input type="text" class="form-control" id="inputQuartos" name="inputQuartos" placeholder="#">
                     </div>
                     <div class="form-group col-md-2">
@@ -116,6 +156,8 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-md-2">
+                    </div>
                     <div class="form-group col-md-2">
                         <label for="inputDuracao">Duração do Aluguer:</label>
                         <input type="text" class="form-control" id="inputDuracao" name="inputDuracao" placeholder="Meses">
@@ -142,12 +184,16 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-2">
                         <label for="inputPreco">Preço:</label>
                         <input type="text" class="form-control" id="inputPreco" name="inputPreco" placeholder="€">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-2">
                         <div class="form-group">
                             <label for="inputFotos">Inserir Fotos:</label>
                             <input type="file" class="form-control-file" id="inputFotos" name="inputFotos[]" multiple>
@@ -156,51 +202,59 @@
                 </div>
                 <br>
                 <div class="row">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-md-5">
+                    </div>
                     <div class="form-group col-md-6">
-                        <button type="submit" class="btn btn-primary">Criar</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Criar Anúncio</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="/JS/mapsAPI.js"></script>
-    
-    <script>
-      function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 17,
-          center: { lat: 38.7108275, lng: -9.136863 },
-        });
-        const geocoder = new google.maps.Geocoder();
-        document.getElementById("geocodeSubmit").addEventListener("click", () => {
-          geocodeAddress(geocoder, map);
-        });
-      }
-      function geocodeAddress(geocoder, resultsMap) {
-        const address = document.getElementById("inputEndereco").value;
-        geocoder.geocode({ address: address }, (results, status) => {
-          if (status === "OK") {
-            document.getElementById("inputEndereco").value = results[0].formatted_address;
-            document.getElementById("inputLatitude").value = results[0].geometry.location.lat();
-            document.getElementById("inputLongitude").value = results[0].geometry.location.lng();
-            document.getElementById("inputLocalizacao").value = results[0].address_components[2].long_name;
-            resultsMap.setCenter(results[0].geometry.location);
-            new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location,
+</div>
+        <script type="text/javascript" src="/JS/mapsAPI.js"></script>
+        
+        <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 17,
+            center: { lat: 38.7108275, lng: -9.136863 },
             });
-          } else {
-            alert(
-              "Geocode was not successful for the following reason: " + status
-            );
-          }
-        });
-      }
-
-
-  </script>
-  
-    
-    <!-- END Banner -->
-
+            const geocoder = new google.maps.Geocoder();
+            document.getElementById("geocodeSubmit").addEventListener("click", () => {
+            geocodeAddress(geocoder, map);
+            });
+        }
+        function geocodeAddress(geocoder, resultsMap) {
+            const address = document.getElementById("inputEndereco").value;
+            geocoder.geocode({ address: address }, (results, status) => {
+            if (status === "OK") {
+                document.getElementById("inputEndereco").value = results[0].formatted_address;
+                document.getElementById("inputLatitude").value = results[0].geometry.location.lat();
+                document.getElementById("inputLongitude").value = results[0].geometry.location.lng();
+                document.getElementById("inputLocalizacao").value = results[0].address_components[2].long_name;
+                resultsMap.setCenter(results[0].geometry.location);
+                new google.maps.Marker({
+                map: resultsMap,
+                position: results[0].geometry.location,
+                });
+            } else {
+                alert(
+                "Geocode was not successful for the following reason: " + status
+                );
+            }
+            });
+        }
+    </script>
+    </div>
+</div>
+<!-- END Banner -->
 </body>

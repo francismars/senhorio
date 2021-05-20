@@ -17,9 +17,13 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('/utilizador/edit/{id}', 'SenhoriosController@updateUtilizador');
+$router->post('/utilizador/edit/profilePic/{id}', 'SenhoriosController@storeProfileImg');
+
 $router->get('/senhorios/', 'SenhoriosController@getAllSenhorios');
 $router->group(['prefix' => '/senhorio/'], function() use ($router){
-    $router->get('/{id}', 'SenhoriosController@getSenhorio');
+    $router->get('/home', 'SenhoriosController@senhorioHome');
+    $router->get('/{id}', 'SenhoriosController@getSenhorio');    
 });
 
 $router->group(['prefix' => '/propriedades/'], function() use ($router){
