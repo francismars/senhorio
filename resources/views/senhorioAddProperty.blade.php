@@ -38,6 +38,7 @@
     </style>
 
 </head>
+<body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -77,6 +78,7 @@
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>
         </div>
+        <br>
         <div class="content text-left">
 	        <form method="post" action="/propriedade/" enctype="multipart/form-data">
                 <div class="row">
@@ -89,7 +91,7 @@
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <label for="inputtipo">Tipo de Propriedade:</label>
                         <select id="inputtipo" name="inputtipo" class="form-control">
                         <option selected>Quarto</option>
@@ -108,7 +110,7 @@
                         <br>
                         <button type="button" class="btn btn-primary" id="geocodeSubmit">Confirmar</button>
                     </div>  
-                </div>        
+                </div>       
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
@@ -130,20 +132,21 @@
                         <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" placeholder="Descrição">
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputQuartos">Número de Quartos:</label>
-                        <input type="text" class="form-control" id="inputQuartos" name="inputQuartos" placeholder="#">
+                        <input type="number" min="0" class="form-control" id="inputQuartos" name="inputQuartos" placeholder="#">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputBanho">Casas de Banho:</label>
-                        <input type="text" class="form-control" id="inputBanho" name="inputBanho" placeholder="#">
+                        <input type="number"  min="0" class="form-control" id="inputBanho" name="inputBanho" placeholder="#">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputLotacao">Lotação:</label>
-                        <input type="text" class="form-control" id="inputLotacao" name="inputLotacao" placeholder="# pessoas">
+                        <input type="number"  min="0" class="form-control" id="inputLotacao" name="inputLotacao" placeholder="# pessoas">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputOrientacao">Orientação Solar:</label>
@@ -160,7 +163,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputDuracao">Duração do Aluguer:</label>
-                        <input type="text" class="form-control" id="inputDuracao" name="inputDuracao" placeholder="Meses">
+                        <input type="number"  min="0" class="form-control" id="inputDuracao" name="inputDuracao" placeholder="Meses">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputDiponibilidade">Diponibilidade:</label>
@@ -179,17 +182,19 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputArea">Área:</label>
-                        <input type="text" class="form-control" id="inputArea" name="inputArea" placeholder="m2">
+                        <input type="number"  min="0" class="form-control" id="inputArea" name="inputArea" placeholder="m2">
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputPreco">Preço:</label>
-                        <input type="text" class="form-control" id="inputPreco" name="inputPreco" placeholder="€">
+                        <input type="number"  min="0" class="form-control" id="inputPreco" name="inputPreco" placeholder="€">
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>

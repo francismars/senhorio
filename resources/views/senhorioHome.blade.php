@@ -238,7 +238,15 @@
                         <!--<img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" style="float:right" width="200" height="100">
                         <div class="d-inline-flex p-2">-->
                         <div class="row">
-                        @foreach ($propriedades as $propriedade)
+                        <div align="right">
+                          @if($disp==1)                                                        
+                            <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
+                          @else
+                          <input type="checkbox" onclick="checkFluency()"  id="fluency" />
+                          @endif
+                            <label for="fluency">Disponiveis</label>
+                            </div>
+                        @foreach ($propriedadesPag as $propriedade)
                           <div class="col-sm-4">
                             <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
                           <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
@@ -246,9 +254,7 @@
                         </div>
                         @endforeach 
                           </div>
-                          <div>
-                                {{ $propriedades->links('pagination::bootstrap-4') }}
-                            </div>
+                          {{ $propriedadesPag->links('pagination::bootstrap-4') }}
                           
             
                       </div>
@@ -316,4 +322,17 @@
         infowindow.open(map, marker);
     });
   }
+
+  function checkFluency()
+{
+  var checkbox = document.getElementById('fluency');
+  if (checkbox.checked == true)
+  {
+    window.location.replace("/senhorio/homeDisp");
+  }
+  if (checkbox.checked != true)
+  {
+  window.location.replace("/senhorio/home");
+  }
+}
 </script>

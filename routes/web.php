@@ -20,10 +20,14 @@ $router->get('/', function () use ($router) {
 $router->post('/utilizador/edit/{id}', 'SenhoriosController@updateUtilizador');
 $router->post('/utilizador/edit/profilePic/{id}', 'SenhoriosController@storeProfileImg');
 
+
 $router->get('/senhorios/', 'SenhoriosController@getAllSenhorios');
 $router->group(['prefix' => '/senhorio/'], function() use ($router){
     $router->get('/home', 'SenhoriosController@senhorioHome');
+    $router->get('/homeDisp', 'SenhoriosController@senhorioHomeDisp');
     $router->get('/{id}', 'SenhoriosController@getSenhorio');    
+    $router->get('/wallet/', 'SenhoriosController@showWallet');
+    $router->post('/wallet/add', 'SenhoriosController@addSaldo');
 });
 
 $router->group(['prefix' => '/propriedades/'], function() use ($router){

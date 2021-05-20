@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Senhorios;
 use App\Models\Utilizadores;
 use App\Models\Propriedades;
+use App\Models\HistoricoSaldo;
 
 class SenhoriosController extends Controller
 {
@@ -40,12 +41,48 @@ class SenhoriosController extends Controller
         return response()->json('Updated successfully.');
     }
 
+    public function showWallet()
+    {
+        $id = '2';
+        $user = Utilizadores::where('IdUser','=',$id)->get();
+
+        $userHist = HistoricoSaldo::where('IdUser','=',$id)->orderBy('IdSaldo', 'desc')->limit(4)->get();
+
+        return view('wallet',['data'=>$user],['data2'=>$userHist]);
+    }
+
     public function senhorioHome(){
         $id = '2';
         $utilizador = Utilizadores::find($id);
         $senhorioId = Senhorios::where('IdUser', $id)->get('IdSenhorio');
-        $propriedades = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->paginate(3);
-        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades]);
+        $propriedadesPag = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->paginate(3);
+        $propriedades = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->get();
+        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0]);
+    }
+
+    public function addSaldo($id, Request $amount){
+        $user = Utilizadores::find($id);
+        $user->Saldo=$amount->input('amountToAdd')+$user->Saldo;
+        $user->save();
+
+        $histSaldo = new HistoricoSaldo();
+        //$user->IdSaldo=1;
+        $histSaldo->IdUser=$id;
+        $histSaldo->Username=$amount->input('nameUser');
+        $histSaldo->Valor=$amount->input('amountToAdd');
+        $histSaldo->Data=Carbon::now();
+        $histSaldo->save();
+
+        return response()->json(['res'=>$user->Saldo]);
+    }
+
+    public function senhorioHomeDisp(){
+        $id = '2';
+        $utilizador = Utilizadores::find($id);
+        $senhorioId = Senhorios::where('IdUser', $id)->get('IdSenhorio');
+        $propriedadesPag = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->where('Disponibilidade', "Disponivel")->paginate(3);
+        $propriedades = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->get();
+        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>1]);
     }
 
     public function storeProfileImg(Request $req, $id)
