@@ -78,6 +78,7 @@
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>
         </div>
+        
         <br>
         <div class="content text-left">
 	        <form method="post" action="/propriedade/" enctype="multipart/form-data">

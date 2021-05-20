@@ -225,11 +225,16 @@
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="tab" href="#profile">Map</a>
-                    </li>
-                    <!--<li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" href="#contact">Contact</a>
-                    </li>-->
-                  </ul>
+                    </li>     
+                           </ul>  
+                            <div align="right">
+                          @if($disp==1)                                                        
+                            <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
+                          @else
+                          <input type="checkbox" onclick="checkFluency()"  id="fluency" />
+                          @endif
+                            <label for="fluency">Disponiveis</label>
+                  </div>   
                   </div>
 
                   <div class="card-body">
@@ -238,14 +243,7 @@
                         <!--<img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" style="float:right" width="200" height="100">
                         <div class="d-inline-flex p-2">-->
                         <div class="row">
-                        <div align="right">
-                          @if($disp==1)                                                        
-                            <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
-                          @else
-                          <input type="checkbox" onclick="checkFluency()"  id="fluency" />
-                          @endif
-                            <label for="fluency">Disponiveis</label>
-                            </div>
+                        
                         @foreach ($propriedadesPag as $propriedade)
                           <div class="col-sm-4">
                             <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
@@ -298,12 +296,14 @@
           '<h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>' +
           '<div id="bodyContent">' +
           "<p>{{ $propriedade['Descricao'] }}</p>" +
+          "<p><b>Preço:</b> {{ $propriedade['Preco'] }}€</p>" +
           "</div>" +
           "</div>";
           var prop = 
           {lat : parseFloat("{{ $propriedade['Latitude'] }}"),
           lng : parseFloat("{{ $propriedade['Longitude'] }}"),
-          des : "{{ $propriedade['Descricao'] }}" };
+          des : "{{ $propriedade['Descricao'] }}",
+          tipo : "{{ $propriedade['TipoPropriedade'] }}" };
           placeMarker(prop,map,contentString)
         
       @endforeach  
@@ -313,7 +313,7 @@
     const marker = new google.maps.Marker({
       position: { lat: prop.lat, lng: prop.lng},
           map,
-          // label: ("{{ $propriedade['TipoPropriedade'] }}" =='Casa' ? "C" : "Q") ,
+          label: (prop.tipo=='Casa' ? "C" : "Q") ,
           title: prop.des,
     });
     google.maps.event.addListener(marker, 'click', function(){

@@ -7,6 +7,7 @@ use App\Models\Senhorios;
 use App\Models\Utilizadores;
 use App\Models\Propriedades;
 use App\Models\HistoricoSaldo;
+use Carbon\Carbon;
 
 class SenhoriosController extends Controller
 {
@@ -60,7 +61,8 @@ class SenhoriosController extends Controller
         return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0]);
     }
 
-    public function addSaldo($id, Request $amount){
+    public function addSaldo(Request $amount){
+        $id = 2;
         $user = Utilizadores::find($id);
         $user->Saldo=$amount->input('amountToAdd')+$user->Saldo;
         $user->save();
@@ -75,6 +77,7 @@ class SenhoriosController extends Controller
 
         return response()->json(['res'=>$user->Saldo]);
     }
+
 
     public function senhorioHomeDisp(){
         $id = '2';

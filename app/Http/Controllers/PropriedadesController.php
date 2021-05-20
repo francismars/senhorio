@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Propriedades;
 use App\Models\FotosPropriedades;
+use App\Models\Rating;
 
 class PropriedadesController extends Controller
 {
@@ -13,6 +14,17 @@ class PropriedadesController extends Controller
     public function __construct(Propriedades $propriedades)
     {
         $this->model = $propriedades;
+    }
+
+
+    public function propertyInfo($id)
+    {
+        $property = Propriedades::where('IdPropriedade', $id)->get();
+        $avgStar = Rating::where('IdPropriedade', $id)->avg('Rating');
+
+
+        //return response()->json($avgStar);
+        return view('infoProp',compact('property','avgStar'));
     }
 
     public function getAllPropriedades(){

@@ -93,7 +93,7 @@
                             <br><br><br>
 
                             <!--<a href="javascript:%20check_empty()" id="submit" >Add</a>-->
-                            <button id="submitWallet" name="sub" type="submit" onclick="return check_empty()">Add</button>
+                            <button id="submitWallet" name="sub" type="submit" onclick="return check_empty()" href="javascript:%20check_empty()">Add</button>
                         </form>
                     </div>
                         <!-- Popup Div Ends Here -->

@@ -24,10 +24,10 @@ $router->post('/utilizador/edit/profilePic/{id}', 'SenhoriosController@storeProf
 $router->get('/senhorios/', 'SenhoriosController@getAllSenhorios');
 $router->group(['prefix' => '/senhorio/'], function() use ($router){
     $router->get('/home', 'SenhoriosController@senhorioHome');
-    $router->get('/homeDisp', 'SenhoriosController@senhorioHomeDisp');
-    $router->get('/{id}', 'SenhoriosController@getSenhorio');    
+    $router->get('/homeDisp', 'SenhoriosController@senhorioHomeDisp'); 
     $router->get('/wallet/', 'SenhoriosController@showWallet');
     $router->post('/wallet/add', 'SenhoriosController@addSaldo');
+    $router->get('/{id}', 'SenhoriosController@getSenhorio');   
 });
 
 $router->group(['prefix' => '/propriedades/'], function() use ($router){
@@ -40,7 +40,7 @@ $router->group(['prefix' => '/propriedade/'], function() use ($router){
     $router->get('/add', function ()  {
         return view('senhorioAddProperty');
     });
-    $router->get('/{id}', 'PropriedadesController@getPropriedade');
+    $router->get('/{id}', 'PropriedadesController@propertyInfo');
     $router->post('/', 'PropriedadesController@storePropriedade');
     $router->put('/{id}', 'PropriedadesController@updatePropriedade');
     $router->delete('/{id}', 'PropriedadesController@destroyPropriedade');
