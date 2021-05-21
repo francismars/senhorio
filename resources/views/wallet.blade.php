@@ -26,7 +26,7 @@
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
     <div class="container">
-      <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
       <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,16 +36,10 @@
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
         <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="">Home</a>
+                        <a class="nav-link text-black text-end" href="/senhorio/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="">Search</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="">Wallet</a>
+                        <a class="nav-link text-black text-end" href="/senhorio/wallet">Wallet</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-black text-end" href="#">Sign Out</a>
