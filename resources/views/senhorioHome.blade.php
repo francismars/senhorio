@@ -186,7 +186,8 @@
                     </div>
                   </div>
 
-                  <button type="submit" class="mt-3 btn btn-primary " >Make Changes!</button>
+                  <button type="submit" class="mt-3 btn btn-primary">Update Profile</button>
+                  <a class="mt-3 btn btn-success" href="/propriedade/add" role="button">Add Property</a>
                 </form>
 
             <script>
@@ -245,11 +246,15 @@
                         <div class="row">
                         
                         @foreach ($propriedadesPag as $propriedade)
-                          <div class="col-sm-4">
+                          
+                            <div class="col-sm-4">
+                            <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
                             <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
+                            </a>
                           <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
                           <p>{{ $propriedade['Descricao'] }}</p>
-                        </div>
+                          </div>
+                 
                         @endforeach 
                           </div>
                           {{ $propriedadesPag->links('pagination::bootstrap-4') }}
@@ -293,7 +298,9 @@
           '<div id="content">' +
           '<div id="siteNotice">' +
           "</div>" +
+          '<a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">' +
           '<h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>' +
+          "</a>" +
           '<div id="bodyContent">' +
           "<p>{{ $propriedade['Descricao'] }}</p>" +
           "<p><b>Preço:</b> {{ $propriedade['Preco'] }}€</p>" +

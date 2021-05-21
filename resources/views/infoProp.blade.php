@@ -70,7 +70,7 @@
                             style="max-width: 700px; width:100%;  border-radius: 50px !important;">
                             
                         @foreach($property as $propInfo) 
-                        <form class="foodstars" action="" id="addStar" method="POST">
+
                         <div class=" px-3 pt-3 profile-container text-center">
                             <h2>Orientação Solar</h2>
                             <h3>
@@ -89,7 +89,30 @@
                             <div class="mt-3 p-2 star-icon d-flex justify-content-center">
                                 <label >Media Rating: </label> <h3 id="totalAVGrating"><b id="valorRate">{{$avgStar}}</b> </h3><i class="fa fa-star" data-rating="2" style="font-size:20px;color:#ff9f00;"></i>
                             </div>
-                  
+                            <div class="mt-3 p-2 star-icon d-flex justify-content-center">
+                                <label >Disponivel: </label> </i>
+                                @if($propInfo['Disponibilidade'] == "Disponivel" || $propInfo['Disponibilidade'] == "Disponível")
+                                &nbsp;Sim
+                                @else
+                                &nbsp;Nao
+                                @endif
+                            </div>
+                            <div class="mt-3 p-2 star-icon d-flex justify-content-center">
+                                <label >Numero de Likes: </label> </i>
+                                @if($propInfo['Disponibilidade'] == "Disponivel" || $propInfo['Disponibilidade'] == "Disponível")
+                                &nbsp;Sim
+                                @else
+                                &nbsp;Nao
+                                @endif
+                            </div>
+                            <div class="mt-3 p-2 star-icon d-flex justify-content-center">
+                                <label >Inquilino Actual: </label> </i>
+                                @if($propInfo['Disponibilidade'] == "Disponivel" || $propInfo['Disponibilidade'] == "Disponível")
+                                &nbsp;Sim
+                                @else
+                                &nbsp;Nao
+                                @endif
+                            </div>
                     </div>
                 </div>
                 
@@ -137,44 +160,16 @@
                             <h2>Duração Aluguer: </h2>
                             <p>{{$propInfo['DuracaoAluguer']}}</p>
                         </div>
-                        <div class="px-3">
-                            <form action="/startNewRent/{{$propInfo['IdPropriedade']}}" method="post" name="form">
-                                <button type="button" class="btn btn-primary btn-lg" onclick="div_show2();check_money({{'$result'}});">Alugar!</button>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
 
             <div class="d-flex flex-row justify-content-start">
-                <div class="p-2">
-                    <form action="" method="post" name="form">
-                        <button type="submit" class="btn btn-outline-primary">Contactar Proprietário</button>
-                    </form>
-                </div>
+
             </div>
 
             </div>
-            <script>
-                $('#addStar').change('.fa', function(e) {
-                //alert("ola");
-                req = $.ajax({
-                    type: 'POST',
-                    cache: false,
-                    dataType: 'JSON',
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    success: function(data) {
-                    console.log(data);
-                    }
-                });
-                req.done(function(data){
-                    //$('#totalAVGrating').fadeOut(500).fadeIn(500);
-                    $('#valorRate').text(data.res);
-                    //console.log(res);
-                });
-                
-                });
-            </script>
+
 
             <div class="row p-3 profile-container" id="parteBaixo">
                 <div class="col">
@@ -203,24 +198,7 @@
             </div>
         </div>
     </div>
-    <div id="abc2">
-        <!-- Popup Div Starts Here -->
-        <div id="popupContact">
-            <!-- Contact Us Form -->
-            <form action="" onsubmit="return check_empty()" id="form"
-                method="post" name="form">
-                <img id="close" src="/img/closeButton.png" onclick="div_hide2()">
-                <h1>Start Renting</h1>
-                <input id="name2" name="nameUser" placeholder="Amount" type="hidden" value="">
-                <input id="name" name="amountToAdd" placeholder="Amount" type="number" value="{{$propInfo['Preco']}}"
-                    disabled>
-                <br><br><br>
-
-                <!--<a href="javascript:%20check_empty()" id="submit" >Add</a>-->
-                <button id="submitWallet" type="submit" name="sub" href="javascript:%20check_empty()">Pay</button>
-            </form>
-        </div>
-        <!-- Popup Div Ends Here -->
+    
     </div>
     </div>
     @endforeach

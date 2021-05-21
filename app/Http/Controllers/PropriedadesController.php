@@ -89,7 +89,8 @@ class PropriedadesController extends Controller
         }
         //return response()->json($request->all());
         //$propriedade = Propriedades::create($request->all());
-        return response()->json($propriedade);
+        //return response()->json($propriedade);
+        return redirect()->to('senhorio/home');
     }
 
     public function updatePropriedade($id, Request $request){
