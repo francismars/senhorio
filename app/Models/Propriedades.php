@@ -17,7 +17,9 @@ class Propriedades extends Model
      */
     protected $fillable = [
         'IdPropriedade', 'IdSenhorio', 'TipoPropriedade', 'Localizacao', 'Latitude', 'Longitude', 'AreaMetros', 'Preco',
-        'Descricao', 'OrientacaoSolar', 'NumeroQuartos', 'DuracaoAluguer', 'Lotacao', 'Disponibilidade', 'CasasBanho', 'EstadoConservacao',       
+        'Descricao', 'OrientacaoSolar', 'NumeroQuartos', 'DuracaoAluguer', 'Lotacao', 'Disponibilidade', 'CasasBanho', 'EstadoConservacao', 
+        'internetAcess', 'limpeza', 'faixaEtariaMin', 'faixaEtariaMax', 'generoMasc', 'generoFemin', 'aceitaFumadores', 'aceitaAnimais', 
+
     ];
 
     public $timestamps = false; 

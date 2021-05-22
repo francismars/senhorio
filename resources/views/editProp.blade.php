@@ -36,6 +36,7 @@
         /* The width is the width of the web page */
       }
     </style>
+        </style>
       <title>jQuery UI Slider - Range slider</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -43,11 +44,13 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
+    $( "#faixaEtariaMin" ).val( {{$propriedade['faixaEtariaMin']}} );
+    $( "#faixaEtariaMax" ).val( {{$propriedade['faixaEtariaMax']}} );
     $( "#slider-range" ).slider({
       range: true,
       min: 14,
       max: 88,
-      values: [ 18, 23 ],
+      values: [ {{$propriedade['faixaEtariaMin']}}, {{$propriedade['faixaEtariaMax']}} ],
       slide: function( event, ui ) {
         $( "#idades" ).val( ui.values[ 0 ] +" - "+ ui.values[ 1 ] );
         $( "#faixaEtariaMin" ).val( ui.values[ 0 ] );
@@ -92,17 +95,18 @@
 <div class="banner-image d-flex justify-content-center align-items-center pt-5">
     <div class="container profile-container m-5">
         <div class="content text-center">
-        <h1>Adicionar Propriedade</h1>
+        <h1>Editar Propriedade {{$propriedade['IdPropriedade']}}</h1>
         </div>
         
         <br>
         <div class="content text-left">
-	        <form method="post" action="/propriedade/" enctype="multipart/form-data">
+	        <form method="POST" action="/propriedade/edit/{{$propriedade['IdPropriedade']}}" enctype="multipart/form-data">
+            <input type='hidden' name='_method' value='PUT'>
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="hidden" class="form-control" id="idSenhorio" name="idSenhorio" value="1" readonly>
+                        <input type="hidden" class="form-control" id="idSenhorio" name="idSenhorio" value="{{$propriedade['IdSenhorio']}}" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -111,10 +115,13 @@
                     <div class="col-3">
                         <label for="inputtipo">Tipo de Propriedade:</label>
                         <select id="inputtipo" name="inputtipo" class="form-control">
-                        <option selected>Quarto</option>
-                        <option>Casa</option>
+                        <option id="Quarto">Quarto</option>
+                        <option id="Casa">Casa</option>
                         </select>
                     </div>
+                    <script>
+                        document.getElementById("{{$propriedade['TipoPropriedade']}}").selected = "true";
+                    </script>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-2">
@@ -130,16 +137,15 @@
                 </div>       
                 <div class="row">
                     <div class="form-group col-md-2">
-                        
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="hidden" class="form-control" id="inputLatitude" name="inputLatitude" value="" readonly>
+                        <input type="hidden" class="form-control" id="inputLatitude" name="inputLatitude" value="{{$propriedade['Latitude']}}" readonly>
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="hidden" class="form-control" id="inputLongitude" name="inputLongitude" value="" readonly>
+                        <input type="hidden" class="form-control" id="inputLongitude" name="inputLongitude" value="{{$propriedade['Longitude']}}" readonly>
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="hidden" class="form-control" id="inputLocalizacao" name="inputLocalizacao" value="" readonly>               
+                        <input type="hidden" class="form-control" id="inputLocalizacao" name="inputLocalizacao" value="{{$propriedade['Localizacao']}}" readonly>               
                     </div>
                 </div>
                 <div class="row">
@@ -147,7 +153,7 @@
                     </div>
                     <div class="form-group col-md-8">
                         <label for="inputDescricao">Descrição:</label>
-                        <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" placeholder="Descrição">
+                        <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" value="{{$propriedade['Descricao']}}">
                     </div>
                 </div>
                 <br>
@@ -156,19 +162,19 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputPreco">Preço:</label>
-                        <input type="number"  min="0" class="form-control" id="inputPreco" name="inputPreco" placeholder="€">
+                        <input type="number"  min="0" class="form-control" id="inputPreco" name="inputPreco" value="{{$propriedade['Preco']}}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputQuartos">Número de Quartos:</label>
-                        <input type="number" min="0" class="form-control" id="inputQuartos" name="inputQuartos" placeholder="#">
+                        <input type="number" min="0" class="form-control" id="inputQuartos" name="inputQuartos" value="{{$propriedade['NumeroQuartos']}}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputBanho">Casas de Banho:</label>
-                        <input type="number"  min="0" class="form-control" id="inputBanho" name="inputBanho" placeholder="#">
+                        <input type="number"  min="0" class="form-control" id="inputBanho" name="inputBanho" value="{{$propriedade['CasasBanho']}}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputLotacao">Lotação:</label>
-                        <input type="number"  min="0" class="form-control" id="inputLotacao" name="inputLotacao" placeholder="# pessoas">
+                        <input type="number"  min="0" class="form-control" id="inputLotacao" name="inputLotacao" value="{{$propriedade['Lotacao']}}">
                     </div>
 
                 </div>
@@ -178,23 +184,29 @@
                     <div class="form-group col-md-2">
                         <label for="inputOrientacao">Orientação Solar:</label>
                         <select id="inputOrientacao" name="inputOrientacao" class="form-control">
-                        <option selected>Norte</option>
-                        <option>Sul</option>
-                        <option>Este</option>
-                        <option>Oeste</option>
+                        <option id="Norte">Norte</option>
+                        <option id="Sul">Sul</option>
+                        <option id="Este">Este</option>
+                        <option id="Oeste">Oeste</option>
                         </select>
                     </div>
+                    <script>
+                        document.getElementById("{{$propriedade['OrientacaoSolar']}}").selected = "true";
+                    </script>
                     <div class="form-group col-md-2">
                         <label for="inputEstado">Estado:</label>
                         <select id="inputEstado" name="inputEstado" class="form-control">
-                        <option selected>Novo</option>
-                        <option>Usado</option>
-                        <option>Remodelado</option>
+                        <option id="Novo">Novo</option>
+                        <option id="Usado">Usado</option>
+                        <option id="Remodelado">Remodelado</option>
                         </select>
                     </div>
+                    <script>
+                        document.getElementById("{{$propriedade['EstadoConservacao']}}").selected = "true";
+                    </script>
                     <div class="form-group col-md-2">
                         <label for="inputArea">Área:</label>
-                        <input type="number"  min="0" class="form-control" id="inputArea" name="inputArea" placeholder="m2">
+                        <input type="number"  min="0" class="form-control" id="inputArea" name="inputArea" value="{{$propriedade['AreaMetros']}}">
                     </div>
 
                 
@@ -206,11 +218,11 @@
                 </div>
                 <div class="form-group col-md-2"> 
                
-                <input type="text" id="faixaEtariaMin" name="faixaEtariaMin" class="form-control" value="18" readonly hidden> 
+                <input type="text" id="faixaEtariaMin" name="faixaEtariaMin" class="form-control" value="{{$propriedade['FaixaEtariaMin']}}" readonly hidden> 
                 </div>
                 <div class="form-group col-md-2"> 
                 
-                <input type="text" id="faixaEtariaMax" name="faixaEtariaMax" class="form-control" value="23" readonly hidden> 
+                <input type="text" id="faixaEtariaMax" name="faixaEtariaMax" class="form-control" value="{{$propriedade['FaixaEtariaMax']}}" readonly hidden> 
                 </div>
                 </div>
                 <br>
@@ -219,22 +231,26 @@
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="internetAcess" name="internetAcess"
-                        checked>
+                        @if ($propriedade['internetAcess']==1) ? checked>
+                        @endif
                     <label for="internetAcess">Internet Acess</label>
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="limpeza" name="limpeza"
-                        checked>
+                        @if ($propriedade['limpeza']==1) ? checked>
+                        @endif
                     <label for="limpeza">Limpeza</label>
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="generoMasc" name="generoMasc"
-                        checked>
+                        @if ($propriedade['generoMasc']==1) ? checked>
+                        @endif
                     <label for="generoMasc">Aceita Homens</label>
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="generoFemin" name="generoFemin"
-                        checked>
+                    @if ($propriedade['generoFemin']==1) ? checked>
+                        @endif
                     <label for="generoFemin">Aceita Mulheres</label>
                     </div>
                     </div>
@@ -243,12 +259,14 @@
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="aceitaFumadores" name="aceitaFumadores"
-                        checked>
+                    @if ($propriedade['aceitaFumadores']==1) ? checked>
+                        @endif
                     <label for="aceitaFumadores">Aceita Fumadores</label>
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="aceitaAnimais" name="aceitaAnimais"
-                        checked>
+                    @if ($propriedade['aceitaAnimais']==1) ? checked>
+                        @endif
                     <label for="aceitaAnimais">Aceita Animais</label>
                     </div></div>
 
@@ -276,7 +294,7 @@
                     <div class="form-group col-md-5">
                     </div>
                     <div class="form-group col-md-6">
-                        <button type="submit" class="btn btn-primary btn-lg">Criar Propriedade</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Modificar Propriedade</button>
                     </div>
                 </div>
             </form>
@@ -294,6 +312,22 @@
             const geocoder = new google.maps.Geocoder();
             document.getElementById("geocodeSubmit").addEventListener("click", () => {
             geocodeAddress(geocoder, map);
+            });
+            const latlng = {
+                lat: {{ $propriedade['Latitude'] }},
+                lng: {{ $propriedade['Longitude'] }},
+            };
+            geocoder.geocode({ location: latlng }, (results, status) => {
+                if (status === "OK") {
+                if (results[0]) {
+                    document.getElementById("inputEndereco").value = results[0].formatted_address;
+                    }
+                    else {
+                    window.alert("No results found");
+                }
+                } else {
+                window.alert("Geocoder failed due to: " + status);
+                }
             });
         }
         function geocodeAddress(geocoder, resultsMap) {

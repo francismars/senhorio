@@ -20,6 +20,9 @@ $router->get('/', function () use ($router) {
 $router->post('/utilizador/edit/{id}', 'SenhoriosController@updateUtilizador');
 $router->post('/utilizador/edit/profilePic/{id}', 'SenhoriosController@storeProfileImg');
 
+$router->delete('/disponiveis/delete/{id}', 'PropriedadesController@ApagarIndisponivel');
+$router->post('/disponiveis/add/{id}', 'PropriedadesController@AddIndisponivel');
+
 
 $router->get('/senhorios/', 'SenhoriosController@getAllSenhorios');
 $router->group(['prefix' => '/senhorio/'], function() use ($router){
@@ -42,6 +45,7 @@ $router->group(['prefix' => '/propriedade/'], function() use ($router){
     });
     $router->get('/{id}', 'PropriedadesController@propertyInfo');
     $router->post('/', 'PropriedadesController@storePropriedade');
-    $router->put('/{id}', 'PropriedadesController@updatePropriedade');
+    $router->get('/edit/{id}', 'PropriedadesController@getPropriedadeEdit');
+    $router->put('/edit/{id}', 'PropriedadesController@updatePropriedade');
     $router->delete('/{id}', 'PropriedadesController@destroyPropriedade');
 });

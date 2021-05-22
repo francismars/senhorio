@@ -104,7 +104,12 @@ class SenhoriosController extends Controller
         $user = Utilizadores::find($id);
         $user->imagem=$newImgName;
         $user->save();
-        return view('senhorioHome',['user'=>$user]);
+
+        $id = '2';
+        $senhorioId = Senhorios::where('IdUser', $id)->get('IdSenhorio');
+        $propriedadesPag = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->paginate(3);
+        $propriedades = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->get();
+        return view('senhorioHome',['user'=>$user,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0]);
     }
     
     public function store(Request $request){

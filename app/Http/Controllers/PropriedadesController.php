@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Propriedades;
 use App\Models\FotosPropriedades;
 use App\Models\Rating;
+use App\Models\Arrendamento;
+use App\Models\Indisponivel;
+use Carbon\Carbon;
 
 class PropriedadesController extends Controller
 {
@@ -16,15 +19,38 @@ class PropriedadesController extends Controller
         $this->model = $propriedades;
     }
 
+    public function ApagarIndisponivel($id)
+    {
+    $propertyId = Indisponivel::find($id);
+    $indisponiveis = Indisponivel::find($id)->delete();
+    return redirect()->to('/propriedade/' . $propertyId['IdPropriedade']);
+    }
+
+    public function AddIndisponivel($id, Request $request)
+    {
+    $mes = $request->input('Mes');
+    $indisponiveis = Indisponivel::create([
+        'IdPropriedade' => $id,
+        'Mes' => $mes,
+    ]);
+    return redirect()->to('/propriedade/' . (int)$id);
+    }
 
     public function propertyInfo($id)
     {
         $property = Propriedades::where('IdPropriedade', $id)->get();
+        $arrendamentos = Arrendamento::where('IdPropriedade', $id)->get();
+        $indisponiveis = Indisponivel::where('IdPropriedade', $id)->get();
         $avgStar = Rating::where('IdPropriedade', $id)->avg('Rating');
-
+        $data = Carbon::now();
 
         //return response()->json($avgStar);
-        return view('infoProp',compact('property','avgStar'));
+        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis'));
+    }
+
+    public function getPropriedadeEdit($id){
+        $propriedade = Propriedades::find($id);
+        return view('editProp',compact('propriedade'));
     }
 
     public function getAllPropriedades(){
@@ -50,11 +76,18 @@ class PropriedadesController extends Controller
         $descricao = $request->input('inputDescricao');
         $orientacao = $request->input('inputOrientacao');
         $numQuartos = $request->input('inputQuartos');
-        $duracao = $request->input('inputDuracao');
         $lotacao = $request->input('inputLotacao');
-        $disponibilidade = $request->input('inputDiponibilidade');
         $numWc = $request->input('inputBanho');       
         $estado = $request->input('inputEstado');
+
+        $internetAcess = $request->input('internetAcess');
+        $limpeza = $request->input('limpeza');
+        $faixaEtariaMin = $request->input('faixaEtariaMin');
+        $faixaEtariaMax = $request->input('faixaEtariaMax');
+        $generoMasc = $request->input('generoMasc');
+        $generoFemin = $request->input('generoFemin');
+        $aceitaFumadores = $request->input('aceitaFumadores');
+        $aceitaAnimais = $request->input('aceitaAnimais');
 
         $propriedade = Propriedades::create([
             'IdSenhorio' => $idSenhorio, 
@@ -67,11 +100,20 @@ class PropriedadesController extends Controller
             'Descricao' => $descricao, 
             'OrientacaoSolar' => $orientacao, 
             'NumeroQuartos' => $numQuartos, 
-            'DuracaoAluguer' => $duracao, 
             'Lotacao' => $lotacao, 
-            'Disponibilidade' => $disponibilidade, 
             'CasasBanho' => $numWc, 
             'EstadoConservacao' => $estado, 
+
+            'internetAcess' => $internetAcess=="on" ? '1' : '0',
+            'limpeza' => $limpeza=="on" ? '1' : '0', 
+            
+            'faixaEtariaMin' => $faixaEtariaMin,
+            'faixaEtariaMax' => $faixaEtariaMax,
+            'generoMasc' => $generoMasc=="on" ? '1' : '0',
+            'generoFemin' => $generoFemin=="on" ? '1' : '0',
+            'aceitaFumadores' => $aceitaFumadores=="on" ? '1' : '0',
+            'aceitaAnimais' => $aceitaAnimais=="on" ? '1' : '0',
+
         ]);
 
         if ($request->hasfile('inputFotos')) {
@@ -90,12 +132,61 @@ class PropriedadesController extends Controller
         //return response()->json($request->all());
         //$propriedade = Propriedades::create($request->all());
         //return response()->json($propriedade);
-        return redirect()->to('senhorio/home');
+        return redirect()->to('/senhorio/home');
     }
 
     public function updatePropriedade($id, Request $request){
-        $propriedade = Propriedades::find($id)->update($request->all());
-        return response()->json($propriedade);
+        $idSenhorio = $request->input('idSenhorio');
+        $inputTipo = $request->input('inputtipo');
+        $localizacao = $request->input('inputLocalizacao');
+        $latitude = $request->input('inputLatitude');
+        $longitude = $request->input('inputLongitude');
+        $area = $request->input('inputArea');
+        $preco = $request->input('inputPreco');
+        //$endereco = $request->input('inputEndereco');
+        $descricao = $request->input('inputDescricao');
+        $orientacao = $request->input('inputOrientacao');
+        $numQuartos = $request->input('inputQuartos');
+        $lotacao = $request->input('inputLotacao');
+        $numWc = $request->input('inputBanho');       
+        $estado = $request->input('inputEstado');
+
+        $internetAcess = $request->input('internetAcess');
+        $limpeza = $request->input('limpeza');
+        $faixaEtariaMin = $request->input('faixaEtariaMin');
+        $faixaEtariaMax = $request->input('faixaEtariaMax');
+        $generoMasc = $request->input('generoMasc');
+        $generoFemin = $request->input('generoFemin');
+        $aceitaFumadores = $request->input('aceitaFumadores');
+        $aceitaAnimais = $request->input('aceitaAnimais');
+
+        $propriedade = Propriedades::find($id)->update([
+            'IdSenhorio' => $idSenhorio, 
+            'TipoPropriedade' => $inputTipo,
+            'Localizacao' => $localizacao, 
+            'Latitude' => $latitude, 
+            'Longitude' => $longitude, 
+            'AreaMetros' => $area, 
+            'Preco' => $preco,
+            'Descricao' => $descricao, 
+            'OrientacaoSolar' => $orientacao, 
+            'NumeroQuartos' => $numQuartos, 
+            'Lotacao' => $lotacao, 
+            'CasasBanho' => $numWc, 
+            'EstadoConservacao' => $estado, 
+
+            'internetAcess' => $internetAcess=="on" ? '1' : '0',
+            'limpeza' => $limpeza=="on" ? '1' : '0', 
+            
+            'faixaEtariaMin' => $faixaEtariaMin,
+            'faixaEtariaMax' => $faixaEtariaMax,
+            'generoMasc' => $generoMasc=="on" ? '1' : '0',
+            'generoFemin' => $generoFemin=="on" ? '1' : '0',
+            'aceitaFumadores' => $aceitaFumadores=="on" ? '1' : '0',
+            'aceitaAnimais' => $aceitaAnimais=="on" ? '1' : '0',
+
+        ]);
+        return redirect()->to('/propriedade/' . (int)$id);
     }
 
     public function destroyPropriedade($id){
