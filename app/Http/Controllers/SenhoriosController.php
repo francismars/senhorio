@@ -62,15 +62,16 @@ class SenhoriosController extends Controller
     }
 
     public function addSaldo(Request $amount){
+        dump($amount->getContent());
+        dump($amount->input());
         $id = 2;
         $user = Utilizadores::find($id);
         $user->Saldo=$amount->input('amountToAdd')+$user->Saldo;
         $user->save();
-
         $histSaldo = new HistoricoSaldo();
         //$user->IdSaldo=1;
         $histSaldo->IdUser=$id;
-        $histSaldo->Username=$amount->input('nameUser');
+        $histSaldo->Descricao=$amount->input('Descricao');
         $histSaldo->Valor=$amount->input('amountToAdd');
         $histSaldo->Data=Carbon::now();
         $histSaldo->save();

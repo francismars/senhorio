@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
 
-class Arrendamento extends Model 
+class Pagamentos extends Model 
 {
     //use Authenticatable, Authorizable, HasFactory;
 
@@ -20,8 +20,8 @@ class Arrendamento extends Model
      * @var array
      */
 
-    protected $table = 'Arrendamento';
-    protected  $primaryKey = 'IdArrendamento';
+    protected $table = 'Pagamentos';
+    protected  $primaryKey = 'IdPagamento';
     public $incrementing = true;
     public $timestamps=false;
 }

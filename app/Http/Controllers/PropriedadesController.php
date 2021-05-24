@@ -8,6 +8,8 @@ use App\Models\FotosPropriedades;
 use App\Models\Rating;
 use App\Models\Arrendamento;
 use App\Models\Indisponivel;
+use App\Models\Utilizadores;
+use App\Models\Pagamentos;
 use Carbon\Carbon;
 
 class PropriedadesController extends Controller
@@ -26,6 +28,19 @@ class PropriedadesController extends Controller
     return redirect()->to('/propriedade/' . $propertyId['IdPropriedade']);
     }
 
+    public function showFatura($id)
+    {
+        $arrendamento = Arrendamento::find($id);
+        $property = Propriedades::find($arrendamento['IdPropriedade']);
+        $senhorio = Utilizadores::find($property['IdSenhorio']);
+        $inquilino = Utilizadores::find($arrendamento['IdInquilino']);
+        $pagamentos = Pagamentos::where('IdArrendamento', $id)->get();
+        
+        return view('faturaRent',compact('arrendamento','property','senhorio','inquilino','pagamentos'));
+    }
+
+    
+
     public function AddIndisponivel($id, Request $request)
     {
     $mes = $request->input('Mes');
@@ -43,9 +58,13 @@ class PropriedadesController extends Controller
         $indisponiveis = Indisponivel::where('IdPropriedade', $id)->get();
         $avgStar = Rating::where('IdPropriedade', $id)->avg('Rating');
         $data = Carbon::now();
-
+        $pagamentos = array();
+        foreach($arrendamentos as $arrendamento){
+            $pagamento = Pagamentos::where('IdArrendamento', $arrendamento['IdArrendamento'])->get();
+            array_push($pagamentos, $pagamento);
+        }
         //return response()->json($avgStar);
-        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis'));
+        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis','pagamentos'));
     }
 
     public function getPropriedadeEdit($id){

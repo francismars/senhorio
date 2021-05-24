@@ -35,6 +35,7 @@ $router->group(['prefix' => '/senhorio/'], function() use ($router){
 
 $router->group(['prefix' => '/propriedades/'], function() use ($router){
     $router->get('/', 'PropriedadesController@getAllPropriedades');
+
     $router->get('/{id}', 'PropriedadesController@getPropertiesFromSenhorio');
     $router->delete('/{id}', 'PropriedadesController@destroyPropriedadeSenhorio');
     $router->delete('/', 'PropriedadesController@destroyAllPropriedades');
@@ -45,6 +46,7 @@ $router->group(['prefix' => '/propriedade/'], function() use ($router){
     });
     $router->get('/{id}', 'PropriedadesController@propertyInfo');
     $router->post('/', 'PropriedadesController@storePropriedade');
+    $router->get('/fatura/{id}', 'PropriedadesController@showFatura');
     $router->get('/edit/{id}', 'PropriedadesController@getPropriedadeEdit');
     $router->put('/edit/{id}', 'PropriedadesController@updatePropriedade');
     $router->delete('/{id}', 'PropriedadesController@destroyPropriedade');
