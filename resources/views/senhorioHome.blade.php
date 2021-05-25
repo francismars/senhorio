@@ -106,13 +106,12 @@
                   alert(data);
               }
             });
-            req.done(function(data){
-   
+            req.done(function(response){
+              console.log(response)
               $('.advisor_thumb').fadeOut(1000).fadeIn(1000);
               setTimeout(function(){
                   $('.designation').text("biralas");
               }, 1000);
-              
               //alert("feito");
             });
             });
@@ -191,7 +190,7 @@
                     <div class="form-group col">
                       <h2 class="p-2">Nacionalidade:</h2>
                       <div class="col-sm-8">
-                        <select id="country" name="country" class="form-control mt-2">
+                        <select id="country" name="Nacionalidade" class="form-control mt-2">
                           <option value="Afganistan">Afghanistan</option>
                           <option value="Albania">Albania</option>
                           <option value="Algeria">Algeria</option>
@@ -440,10 +439,9 @@
                           <option value="Zimbabwe">Zimbabwe</option>
                         </select>
                         <script>
-                        escolha = document.getElementById('country').value = "{{$user['Nacionalidade']}}";
+                        escolha = (document.getElementById('country').value = "{{$user['Nacionalidade']}}");
                         console.log(escolha);
                         escolha.selected = true;
-                        escolha.name = "{{$user['Nacionalidade']}}";
                         </script>
                       </div>
                     </div>
