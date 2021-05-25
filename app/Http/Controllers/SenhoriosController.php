@@ -36,7 +36,12 @@ class SenhoriosController extends Controller
         $data->UltimoNome=$req->input('ultimoNome');
         $data->Email=$req->input('mail');
         $data->Morada=$req->input('morada');
+        //dump($req->input('dateNascimento'));
         $data->Nascimento=$req->input('dateNascimento');
+        $data->NIF=$req->input('NIF');
+        dump($req->input('Nacionalidade'));
+        $data->Nacionalidade=$req->input('Nacionalidade');
+        $data->Telefone=$req->input('Telefone');
         $data->save();
         
         return response()->json('Updated successfully.');
@@ -58,7 +63,8 @@ class SenhoriosController extends Controller
         $senhorioId = Senhorios::where('IdUser', $id)->get('IdSenhorio');
         $propriedadesPag = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->paginate(3);
         $propriedades = Propriedades::where('IdSenhorio', $senhorioId[0]['IdSenhorio'])->get();
-        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0]);
+        $dataHoje = Carbon::now();
+        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0,'dataHoje'=>$dataHoje]);
     }
 
     public function addSaldo(Request $amount){

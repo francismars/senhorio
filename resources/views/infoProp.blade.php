@@ -6,7 +6,7 @@
     <title> House | UniRent</title>
     <link rel="shortcut icon" type="image/jpg" href="img/logo/UniRent-V2.png" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/CSS/style.css">
@@ -75,10 +75,21 @@
                             <h3>
                             </h3>
                         </div>
-  
-                            <div class="star-icon d-flex justify-content-center">
-                                <label >Rating: </label> <h3 id="totalAVGrating"><b id="valorRate">{{$avgStar}}</b> </h3><i class="fa fa-star" data-rating="2" style="font-size:20px;color:#ff9f00;"></i>
-                            </div>
+                            <script>
+                            console.log("oi" + {{$avgStar}});
+                            </script>
+                            @if ($avgStar!="")
+                                <div class="star-icon d-flex justify-content-center">
+                                    <label >Rating: </label> <h3 id="totalAVGrating"></h3>
+                                    @for ($i=0;$i<$avgStar;$i++)
+                                    <i class="fa fa-star" data-rating="2" style="font-size:20px;color:#ff9f00;"></i>
+                                    @endfor
+                                    @for ($i=$avgStar;$i<5;$i++)
+                                    <i class="fa fa-star" data-rating="2" style="font-size:20px;color:#000000;"></i>
+                                    @endfor
+                                </div>
+                            @endif
+                            
                     </div>
                 </div>
                 
@@ -227,6 +238,10 @@
 
                         
                     </div>
+                        </div>
+                        </div>
+
+            <div class="row p-3 profile-container" id="parteBaixo">        
 
                     <h1>Disponibilidade<h1>
                     <div class="container">
@@ -293,44 +308,84 @@
         </div>
         <p hidden>{{ $data->addMonths(1) }}</p>
     @endfor
-        </div></div>
-                    <script>
-                        function initMap() {
-                        const map = new google.maps.Map(document.getElementById("map"), {
-                            zoom: 14,
-                            center: { lat: {{ $propInfo['Latitude'] }}, lng: {{ $propInfo['Longitude'] }} },
-                        });
-                        new google.maps.Marker({
-                        position: map['center'],
-                        map,
-                        title: "Hello World!",
-                        });
-                        const geocoder = new google.maps.Geocoder();
-                        const latlng = {
-                            lat: {{ $propInfo['Latitude'] }},
-                            lng: {{ $propInfo['Longitude'] }},
-                        };
-                        geocoder.geocode({ location: latlng }, (results, status) => {
-                            if (status === "OK") {
-                            if (results[0]) {
-                                document.getElementById("morada").innerHTML = results[0].formatted_address;
-                                }
-                             else {
-                                window.alert("No results found");
-                            }
-                            } else {
-                            window.alert("Geocoder failed due to: " + status);
-                            }
-                        });
-                        }
-                        
-                    </script>
-                </div>
-            </div>
         </div>
     </div>
-    
-    </div>
-    </div>
+</div>            
     @endforeach
+
+<div class="row p-3 profile-container" id="parteBaixo">   
+    <div class="col">
+        <div class="p-3">
+            <h1>Pagamentos em Atraso:</h1>
+        </div>
+        <div class="w3-container" >
+        <table class="w3-table-all w3-hoverable" id="pagamentosatraso">
+                            <thead>
+                            <tr class="w3-light-grey">
+                                <th>Mes de Contrato</th>
+                                <th>Total Pago</th>
+                                <th>Total em Falta</th>
+                                <th>Inquilino ID</th>
+                                <th>Contactar Inquilino</th>
+                            </tr>
+                            </thead>      
+        </div>
+        @foreach ($arrendamentos as $arrendamento)
+                            @php
+                            $totalPago = 0;
+                            @endphp
+                            @foreach ($pagamentos as $pagamentos1)
+                                @foreach ($pagamentos1 as $pagamento)
+                                    @if ($pagamento['IdArrendamento'] == $arrendamento['IdArrendamento'])
+                                    @php
+                                    $totalPago = $pagamento['Valor'] + $totalPago;
+                                    @endphp                                    
+                                    @endif
+                                @endforeach
+                            @endforeach
+    
+                            @if ($totalPago!=$propInfo['Preco'])
+                            <script>
+                            document.getElementById("pagamentosatraso").innerHTML +=
+                            "<tr><td> {{ $arrendamento['MesContrato']}} </td>" +
+                            "<td>{{ $totalPago }}€</td>" +
+                            "<td>{{ $propInfo['Preco'] - $totalPago }}€</td>" +
+                            "<td>{{ $arrendamento['IdInquilino']}}</td>" +
+                            "<td><a href=''>Contactar Inquilino</a></td></tr></table>"                        
+                            </script>
+                            @endif
+                    @endforeach
+    </div>
+</div>    
 </body>
+<script>
+    function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: { lat: {{ $propInfo['Latitude'] }}, lng: {{ $propInfo['Longitude'] }} },
+    });
+    new google.maps.Marker({
+    position: map['center'],
+    map,
+    title: "Hello World!",
+    });
+    const geocoder = new google.maps.Geocoder();
+    const latlng = {
+        lat: {{ $propInfo['Latitude'] }},
+        lng: {{ $propInfo['Longitude'] }},
+    };
+    geocoder.geocode({ location: latlng }, (results, status) => {
+        if (status === "OK") {
+        if (results[0]) {
+            document.getElementById("morada").innerHTML = results[0].formatted_address;
+            }
+            else {
+            window.alert("No results found");
+        }
+        } else {
+        window.alert("Geocoder failed due to: " + status);
+        }
+    });
+    }
+    
+</script>

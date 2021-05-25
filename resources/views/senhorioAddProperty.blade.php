@@ -220,7 +220,7 @@
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="internetAcess" name="internetAcess"
                         checked>
-                    <label for="internetAcess">Internet Acess</label>
+                    <label for="internetAcess">Internet Access</label>
                     </div>
                     <div class="form-group col-md-2">
                     <input type="checkbox" id="limpeza" name="limpeza"
