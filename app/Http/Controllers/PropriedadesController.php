@@ -24,7 +24,7 @@ class PropriedadesController extends Controller
     public function ApagarIndisponivel($id)
     {
     $propertyId = Indisponivel::find($id);
-    $indisponiveis = Indisponivel::find($id)->delete();
+    Indisponivel::find($id)->delete();
     return redirect()->to('/propriedade/' . $propertyId['IdPropriedade']);
     }
 
@@ -36,7 +36,7 @@ class PropriedadesController extends Controller
         $inquilino = Utilizadores::find($arrendamento['IdInquilino']);
         $pagamentos = Pagamentos::where('IdArrendamento', $id)->get();
         
-        return view('faturaRent',compact('arrendamento','property','senhorio','inquilino','pagamentos'));
+        return view('faturaRent',compact('arrendamento','property','senhorio','inquilino','pagamentos'),['user'=>$senhorio]);
     }
 
     
@@ -49,6 +49,12 @@ class PropriedadesController extends Controller
         'Mes' => $mes,
     ]);
     return redirect()->to('/propriedade/' . (int)$id);
+    }
+
+    public function addPropriedadeView()
+    {
+        $user = Utilizadores::find('1');
+        return view('senhorioAddProperty',['user'=>$user]);
     }
 
     public function propertyInfo($id)
@@ -64,12 +70,15 @@ class PropriedadesController extends Controller
             array_push($pagamentos, $pagamento);
         }
         //return response()->json($avgStar);
-        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis','pagamentos'));
+        $user = Utilizadores::find('1');
+        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis','pagamentos'),['user'=>$user]);
     }
 
     public function getPropriedadeEdit($id){
+        $idUser = '2';
+        $utilizador = Utilizadores::find($idUser);
         $propriedade = Propriedades::find($id);
-        return view('editProp',compact('propriedade'));
+        return view('editProp',compact('propriedade'),['user'=>$utilizador]);
     }
 
     public function getAllPropriedades(){

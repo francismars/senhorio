@@ -7,12 +7,14 @@
   <html lang="en">
   <meta charset="UTF-8">
   <meta name="author" content="UniRent">
-  <title>Senhorio | UniRent</title>
+  <title>Home | UniRent</title>
   <link rel="shortcut icon" type="image/jpg" href="img/logo/UniRent-V2.png"/>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="/CSS/style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
+  
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -41,15 +43,100 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
-        <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="/senhorio/home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="/senhorio/wallet">Wallet</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-black text-end" href="#">Sign Out</a>
-                    </li>
+
+                    <style>
+                      .dropbtn {
+                        
+                        background: url('/img/{{$user['imagem']}}') no-repeat;
+                        background-size: 50px 50px;
+                        color: white;
+                        font-size: 16px;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 50%;
+                        padding: 25px 25px;
+                        
+                      }
+
+                      .dropbtn:hover, .dropbtn:focus {
+                        background-color: #2980B9;
+                      }
+
+                      .dropdown {
+                        position: relative;
+                        
+                        display: inline-block;
+                      }
+
+                      .dropdown-content {
+                        right: 0px;
+                        top: 55px;
+                        display: none;
+                        position: absolute;
+                        background-color: #f1f1f1;
+                        min-width: 160px;
+                        overflow: auto;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                      }
+
+                      .dropdown-content a {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+                      }
+
+                      .outro {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+                        border-bottom: 1px outset rgba(0,0,0,0.2);
+                        text-align: right;
+                        margin: 0px;
+                      }
+
+                      
+
+                      .dropdown a:hover {background-color: #ddd;}
+
+                      .show {display: block;}
+                      </style>
+
+                      <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn"></button>
+                        <div id="myDropdown" class="dropdown-content">
+                          <p class="outro">Hi, {{$user['PrimeiroNome']}}!</p>
+                          <a href="/senhorio/home">Home</a>
+                          <a href="/propriedade/add" >Add Property</a>
+                          <a href="">Messages</a>
+                          <a href="/senhorio/wallet">Wallet</a>
+                          <a href="#">Sign Out</a>
+                        </div>
+                      </div>
+
+                      <script>
+                      /* When the user clicks on the button, 
+                      toggle between hiding and showing the dropdown content */
+                      function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                      }
+
+                      // Close the dropdown if the user clicks outside of it
+                      window.onclick = function(event) {
+                        if (!event.target.matches('.dropbtn')) {
+                          var dropdowns = document.getElementsByClassName("dropdown-content");
+                          var i;
+                          for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                              openDropdown.classList.remove('show');
+                            }
+                          }
+                        }
+                      }
+                      </script>        
         </ul>
       </div>
     </div>
@@ -81,7 +168,7 @@
                 <p class="designation">{{ $user['TipoConta'] }}</p>
               </div>
               <form class="p-2" action="/utilizador/edit/profilePic/{{ $user['IdUser'] }}" method="POST" enctype="multipart/form-data" id="formFotoPerfil">
-                            <label for="formFileLg" class="form-label pt-2 px-1"><h2>Alterar imagem</h2></label>
+                            <label for="formFileLg" class="form-label pt-2 px-1"><h2>Change Avatar</h2></label>
                             <input class="form-control" id="formFileLg" type="file" name="imgProfile">
                             <button type="submit" class="btn btn-primary mt-2">Submit</button>
               </form>
@@ -142,13 +229,13 @@
                     </div>
 
                     <div class="form-group col">
-                      <h2 class="p-2">Primeiro Nome: </h2>
+                      <h2 class="p-2">First Name: </h2>
                       <div class="col-sm-8">
                         <input type="text" minlength="3" maxlength="30" class="form-control mt-2" id="inputPassword" name="primeiroNome" value="{{ $user['PrimeiroNome'] }}">
                       </div>
                     </div>
                     <div class="form-group col">
-                        <h2 class="p-2">Utimo Nome: </h2>
+                        <h2 class="p-2">Last Name: </h2>
                         <div class="col-sm-8">
                           <input type="text" minlength="3" maxlength="30" class="form-control mt-2" id="inputPassword" name="ultimoNome" value="{{ $user['UltimoNome'] }}">
                         </div>
@@ -165,13 +252,13 @@
 
 
                     <div class="form-group col">
-                      <h2 class="p-2">Morada:</h2>
+                      <h2 class="p-2">Address:</h2>
                       <div class="col-sm-8">
                         <input type="text" minlength="3" maxlength="100" class="form-control mt-2" id="inputPassword" name="morada" value="{{ $user['Morada'] }}">
                       </div>
                     </div>
                     <div class="form-group col">
-                      <h2 class="p-2">Data de Nascimento:</h2>
+                      <h2 class="p-2">Birth Date:</h2>
                       <div class="col-sm-8">
                         <input type="date" max="{{ $dataHoje->format('Y-m-d') }}" class="form-control mt-2" id="inputPassword" name="dateNascimento" value="{{ $user['Nascimento'] }}">
                       </div>
@@ -188,7 +275,7 @@
 
 
                     <div class="form-group col">
-                      <h2 class="p-2">Nacionalidade:</h2>
+                      <h2 class="p-2">Nacionality:</h2>
                       <div class="col-sm-8">
                         <select id="country" name="Nacionalidade" class="form-control mt-2">
                           <option value="Afganistan">Afghanistan</option>
@@ -446,7 +533,7 @@
                       </div>
                     </div>
                     <div class="form-group col">
-                      <h2 class="p-2">Numero Telefone:</h2>
+                      <h2 class="p-2">Phone Number:</h2>
                       <div class="col-sm-8">
                         <input type="number" class="form-control mt-2" id="inputPassword" name="Telefone" value="{{ $user['Telefone'] }}">
                       </div>
@@ -454,7 +541,7 @@
                   </div>
 
                   <button type="submit" class="mt-3 btn btn-primary">Update Profile</button>
-                  <a class="mt-3 btn btn-success" href="/propriedade/add" role="button">Add Property</a>
+                  <!-- <a class="mt-3 btn btn-success" href="/propriedade/add" role="button">Add Property</a> -->
                 </form>
 
             <script>
@@ -487,59 +574,93 @@
             </script>
                 <div class="card text-center">
                   <div class="card-header">
-                  <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                      <a class="nav-link active" data-bs-toggle="tab" href="#home">Lista</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" data-bs-toggle="tab" href="#profile">Mapa</a>
-                    </li>     
-                           </ul>  
-                            <div align="right">
-                          @if($disp==1)                                                        
-                            <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
-                          @else
-                          <input type="checkbox" onclick="checkFluency()"  id="fluency" />
-                          @endif
-                            <label for="fluency">Disponiveis</label>
-                  </div>   
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                       <a class="nav-link active" data-bs-toggle="tab" href="#lista">List</a>
+                      </li>
+                      <li class="nav-item">
+                       <a class="nav-link" data-bs-toggle="tab" href="#mapa">Map</a>
+                      </li>
+                      <li class="nav-item">
+                       <a class="nav-link" data-bs-toggle="tab" href="#porpagar">Late Payments</a>
+                      </li>       
+                    </ul>  
+                    <div align="right">
+                      @if($disp==1)                                                        
+                        <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
+                      @else
+                        <input type="checkbox" onclick="checkFluency()"  id="fluency" />
+                      @endif
+                      <label for="fluency">Disponiveis</label>
+                    </div>   
                   </div>
 
                   <div class="card-body">
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane active" id="home" >
-                        <!--<img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" style="float:right" width="200" height="100">
-                        <div class="d-inline-flex p-2">-->
-                        <div class="row">
-                        
+                      <div class="tab-pane active" id="lista" >
+                        <div class="row">                        
                         @foreach ($propriedadesPag as $propriedade)
-                          
-                            <div class="col-sm-4">
+                          <div class="col-sm-4">
                             <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
-                            <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
+                              <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
                             </a>
-                          <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
-                          <p>{{ $propriedade['Descricao'] }}</p>
-                          </div>
-                 
+                            <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
+                            <p>{{ $propriedade['Descricao'] }}</p>
+                          </div>                 
                         @endforeach 
-                          </div>
-                          {{ $propriedadesPag->links('pagination::bootstrap-4') }}
-                          
-            
+                        </div>
+                        {{ $propriedadesPag->links('pagination::bootstrap-4') }}
                       </div>
-  
-                      
-                      <div class="tab-pane fade" id="profile" >
-                      <div id="map"></div>
-                        
+                      <div class="tab-pane fade" id="mapa" >
+                        <div id="map"></div>
                       </div>
-                      <div class="tab-pane fade" id="contact">...</div>
-                    </div>
-                  </div>
+                      <div class="tab-pane fade" id="porpagar" >
+                      <div class="col">
+                        <div class="w3-container" >
+                          <table class="w3-table-all w3-hoverable" id="pagamentosatraso">
+                            <thead>
+                              <tr class="w3-light-grey">
+                                <th>Propriety ID</th>
+                                <th>Date of Rental</th>
+                                <th>Total Paid</th>
+                                <th>Total Missing</th>
+                                <th>Tenant ID</th>
+                                <th>Contact Tenant</th>
+                              </tr>
+                            </thead>      
+                        </div>
+                        @foreach ($arrendamentos as $arrendamento)
+                          @php
+                          $totalPago = 0;
+                          @endphp
+                          @foreach ($pagamentos as $pagamento)
+                                  @if ($pagamento['IdArrendamento'] == $arrendamento['IdArrendamento'])
+                                  @php
+                                  $totalPago = $pagamento['Valor'] + $totalPago;
+                                  @endphp                                    
+                                  @endif
+                          @endforeach
 
-                </div>
-               
+                          @foreach ($propriedades as $propriedade)
+                          @if ($propriedade['IdPropriedade']==$arrendamento['IdPropriedade'])
+                            @if ($totalPago!=$propriedade['Preco'])
+                            <script>
+                            document.getElementById("pagamentosatraso").innerHTML +=
+                            "<tr><td><a href='/propriedade/{{ $arrendamento['IdPropriedade'] }}'>{{ $arrendamento['IdPropriedade'] }}</a></td>" +
+                            "<td>{{ $arrendamento['MesContrato']}}</td>" +
+                            "<td>{{ $totalPago }}€</td>" +
+                            "<td>{{ $propriedade['Preco'] - $totalPago }}€</td>" +
+                            "<td>{{ $arrendamento['IdInquilino']}}</td>" +
+                            "<td><a href=''>Contactar Inquilino</a></td></tr></table>"                        
+                            </script>
+                            @endif
+                          @endif
+                          @endforeach
+                        @endforeach
+                        </div>
+                      </div>
+                  </div>
+                </div>              
             </div> 
           </div>
         </div>
@@ -547,7 +668,6 @@
     </div>
   </div>
   <!-- END Banner -->
-
 </body>
 <script type="text/javascript" src="/JS/mapsAPI.js"></script>
 <script>

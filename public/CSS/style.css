@@ -693,8 +693,52 @@ label{
 
     .box {
       background: #fff;
-      border-radius: 4px;
-      padding-bottom: 100%;
+      padding: 10px;
+      border: 10px;
+      position: relative;
+      height: 150px;
+   }
+
+   .boxTitle {
+    border-bottom: 1px solid #212529;
+    margin-bottom: 20px;
+   }
+
+   .buttonCalendar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0);
+   }
+
+   #buttonInd, .buttonInd {
+    background-color: rgba(226, 0, 0, 0.144); 
+  }
+
+   #buttonInd:hover, .buttonInd:focus {
+    background-color: rgba(226, 0, 0, 0.312); 
+  }
+
+  #buttonDis{
+    background-color: rgba(0, 124, 226, 0.144);
+  }
+
+  #buttonDis:hover, .buttonDis:focus {
+    background-color: rgba(0, 124, 226, 0.312);
+  }
+
+  #buttonFat {
+    background-color: rgba(0, 90, 20, 0.144);
+  }
+
+  #buttonFat:hover, .buttonFat:focus {
+    background-color: rgba(0, 90, 20, 0.312);
+  }
+
+   .buttonCalendar a {
+    font-size: 50%;
    }
    
    .col-lg-2, .col-md-3, .col-xs-6{
