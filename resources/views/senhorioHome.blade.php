@@ -23,8 +23,7 @@
   <style type="text/css">
       /* Set the size of the div element that contains the map */
       #map {
-        height: 210px;
-        /* The height is 400 pixels */
+        height: 256px;
         width: 100%;
         /* The width is the width of the web page */
       }
@@ -154,10 +153,10 @@
         <!-- Cartão do gajo-->
         
         <div class="col-3 pt-2">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+            <div class="single_advisor_profile m-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <!-- <div class="advisor_thumb"><img src="/img/blankProfileImg.png" alt="img profile"> -->
-              <div class="advisor_thumb"><img src="/img/{{$user['imagem']}}" alt="img profile" width="259" height="400">
+              <div class="advisor_thumb p-0"><img src="/img/{{$user['imagem']}}" alt="img profile" width="100%" height="400">
                 <!-- Social Info-->
                 <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
               </div>
@@ -168,7 +167,7 @@
                 <p class="designation">{{ $user['TipoConta'] }}</p>
               </div>
               <form class="p-2" action="/utilizador/edit/profilePic/{{ $user['IdUser'] }}" method="POST" enctype="multipart/form-data" id="formFotoPerfil">
-                            <label for="formFileLg" class="form-label pt-2 px-1"><h2>Change Avatar</h2></label>
+                            <label for="formFileLg" class="form-label pt-5 px-1"><h2>Change Avatar</h2></label>
                             <input class="form-control" id="formFileLg" type="file" name="imgProfile">
                             <button type="submit" class="btn btn-primary mt-2">Submit</button>
               </form>
@@ -203,12 +202,9 @@
             });
             });
             </script>
-        <div class="col-9">
+        <div class="col-9 pt-2">
           <div class="row">
             <div class="col">
-            
-              <h1 class="pt-3 profile-container__welcomeUser">Welcome, {{ $user['PrimeiroNome'] }}</h1>
-
             </div>
           </div>
           <div class="row">
@@ -571,6 +567,7 @@
                     });
                     
                     });
+                    
             </script>
                 <div class="card text-center">
                   <div class="card-header">
@@ -585,22 +582,22 @@
                        <a class="nav-link" data-bs-toggle="tab" href="#porpagar">Late Payments</a>
                       </li>       
                     </ul>  
-                    <div align="right">
+                    <div align="right" hidden>
                       @if($disp==1)                                                        
                         <input type="checkbox" onclick="checkFluency()"  id="fluency" checked />
                       @else
                         <input type="checkbox" onclick="checkFluency()"  id="fluency" />
                       @endif
-                      <label for="fluency">Disponiveis</label>
+                      <label for="fluency" >Disponiveis</label>
                     </div>   
                   </div>
 
                   <div class="card-body">
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane active" id="lista" >
-                        <div class="row">                        
+                      <div class="tab-pane active pt-4" id="lista" >
+                        <div class="row pb-3">                        
                         @foreach ($propriedadesPag as $propriedade)
-                          <div class="col-sm-4">
+                          <div class="col-sm-3">
                             <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
                               <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
                             </a>
@@ -617,7 +614,7 @@
                       <div class="tab-pane fade" id="porpagar" >
                       <div class="col">
                         <div class="w3-container" >
-                          <table class="w3-table-all w3-hoverable" id="pagamentosatraso">
+                          <table class="w3-table-all w3" id="pagamentosatraso">
                             <thead>
                               <tr class="w3-light-grey">
                                 <th>Propriety ID</th>
@@ -678,17 +675,18 @@
         });
         let i = 0;
         infowindow = new google.maps.InfoWindow({
-          maxWidth: 200,
+          maxWidth: 150,
         });
         @foreach ($propriedades as $propriedade)
           contentString =
-          '<div id="content">' +
-          '<div id="siteNotice">' +
-          "</div>" +
+          '<div id="content" class="card border-dark">' +
+          '<div id="siteNotice"  class="card-header" >' +
+          
           '<a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">' +
-          '<h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>' +
+          '<h3>{{ $propriedade['TipoPropriedade'] }}</h3>' +
           "</a>" +
-          '<div id="bodyContent">' +
+          "</div>" +
+          '<div id="bodyContent" class="card-body text-dark">' +
           "<p>{{ $propriedade['Descricao'] }}</p>" +
           "<p><b>Preço:</b> {{ $propriedade['Preco'] }}€</p>" +
           "</div>" +

@@ -80,7 +80,7 @@ class SenhoriosController extends Controller
     public function senhorioHome(){
         $id = '1';
         $utilizador = Utilizadores::find($id);
-        $propriedadesPag = Propriedades::where('IdSenhorio', $id)->paginate(3);
+        $propriedadesPag = Propriedades::where('IdSenhorio', $id)->paginate(4);
         $propriedades = Propriedades::where('IdSenhorio', $id)->get();
         $dataHoje = Carbon::now();
         $arrendamentos = Arrendamento::all();

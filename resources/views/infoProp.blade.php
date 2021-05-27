@@ -74,6 +74,18 @@
                         z-index: 1;
                       }
 
+                      .dropdown-content2 {
+                        right: 0px;
+                        top: 55px;
+                        display: none;
+                        position: absolute;
+                        background-color: #f1f1f1;
+                        min-width: 160px;
+                        overflow: auto;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                      }
+
                       .dropdown-content a {
                         color: black;
                         padding: 12px 16px;
@@ -329,6 +341,14 @@
                     <h1>Disponibilidade<h1>
                     <div class="container">
     <div class="row">
+        <div id="myDropdown2" class="dropdown-content2">
+            <p class="outro">Hi, {{$user['PrimeiroNome']}}!</p>
+            <a href="/senhorio/home">Home</a>
+            <a href="/propriedade/add">Add Property</a>
+            <a href="">Messages</a>
+            <a href="/senhorio/wallet">Wallet</a>
+            <a href="#">Sign Out</a>
+        </div>
     @for ($i = 0; $i < 12; $i++)
         <div class="col-lg-2 col-md-3 col-xs-6 ">        
             <div class="box">
@@ -345,8 +365,20 @@
                         @if ($arrendamento['MesContrato']==$data->format('m-y'))
                         <script>
                         document.getElementById("boxInfo{{$i}}").innerHTML =
-                        "<h3>Alugado</h3>"
-                        </script>        
+                        "<h3>Alugado</h3>" +
+                        "<a onmouseover='mouseOverInfo({{$i}})' href=''><h3>+info</h3></a>"
+                        function mouseOverInfo(){
+                          var dropdowns = document.getElementsByClassName("dropdown-content2");
+                          var i;
+                          for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                              openDropdown.classList.remove('show');
+                            }
+                          }
+                        
+                        }
+                        </script>                      
                             @php
                             $totalPago = 0;
                             @endphp
