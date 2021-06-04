@@ -4,6 +4,8 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  background: rgba(0, 133, 255, 0.19) !important;
+  mix-blend-mode: normal;
 }
 
 h1 {
@@ -57,10 +59,12 @@ h3 {
 /**************/
 /*** CUSTOM ***/
 /**************/
+
+/**
 .banner-image {
   background: rgba(0, 133, 255, 0.19);
   mix-blend-mode: normal;
-}
+}*****/
 
 .blue-font {
   color: var(--main-dark-blue) !important;
@@ -543,11 +547,11 @@ h3 {
 
     /**************/
 /*** CUSTOM ***/
-/**************/
+/******
 .banner-image {
   background: rgba(0, 133, 255, 0.19);
   mix-blend-mode: normal;
-}
+}********/
 
 .blue-font {
   color: var(--main-dark-blue) !important;

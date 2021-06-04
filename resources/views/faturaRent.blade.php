@@ -153,27 +153,27 @@
   <!-- END Nav bar -->
 
     <!-- Banner -->
-    <div class="banner-image d-flex justify-content-center align-items-center pt-5">
-        <div class="container profile-container m-5">
+    <div class="d-flex justify-content-center align-items-center pt-5">
+        <div class="container profile-container mt-5  ">
             <div class="content text-center">
                 <h1>Fatura de Arrendamento</h1>
                 <br>
-
-                <h2>Mes de Aluguer:</h2>
+                <h2>Mês de Aluguer:</h2>
                 <p>{{$arrendamento['MesContrato']}}</p>
                 <h2>Propriedade:</h2>
-                <p>Morada: <a id="morada"></a></p>
+                <p><b>Morada:</b> <a id="morada"></a></p>
                 <h2>Senhorio:</h2>
-                <p>Nome: {{$senhorio['PrimeiroNome']}} {{$senhorio['UltimoNome']}}</p>
-                <p>Morada: {{$senhorio['Morada']}}</p>
-                <p>NIF: {{$senhorio['NIF']}}</p>
+                <p><b>Nome:</b> {{$senhorio['PrimeiroNome']}} {{$senhorio['UltimoNome']}}</p>
+                <p><b>Morada:</b> {{$senhorio['Morada']}}</p>
+                <p><b>NIF:</b> {{$senhorio['NIF']}}</p>
                 <h2>Inquilino:</h2>
-                <p>Nome: {{$inquilino['PrimeiroNome']}} {{$inquilino['UltimoNome']}}</p>
-                <p>Morada: {{$inquilino['Morada']}}</p>
-                <p>NIF: {{$inquilino['NIF']}}</p>
+                <p><b>Nome:</b> {{$inquilino['PrimeiroNome']}} {{$inquilino['UltimoNome']}}</p>
+                <p><b>Morada:</b> {{$inquilino['Morada']}}</p>
+                <p><b>NIF:</b> {{$inquilino['NIF']}}</p>
                 <br>
                 <h2>Valor Total: {{ $property['Preco'] }}€</h2>
-                <p>Pagamentos:</p>
+                <br>
+                <h2>Pagamentos Realizados:</h2>
                 @php
                 $totalPago = 0;
                 @endphp
@@ -183,8 +183,10 @@
                 @endphp
                 <p>Pago <b>{{$pagamento['Valor']}}€</b> em <b>{{$pagamento['Data']}}</b></p>
                 @endforeach
-                <p>Total: <b>{{$totalPago}}€</b></p>
+                <br>
+                <h3>Total: <b>{{$totalPago}}€</b></h3>
                 <h3>Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
+                <button type="submit" class="mt-3 btn btn-primary">Exportar para PDF</button>
             </div>
         </div>
     </div>
