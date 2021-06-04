@@ -174,7 +174,7 @@
   <!-- END Nav bar -->
 
 <!-- Banner -->
-<div class="banner-image d-flex justify-content-center align-items-center pt-5">
+<div class="d-flex justify-content-center align-items-center pt-5">
     <div class="container profile-container m-5">
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>

@@ -143,7 +143,7 @@
   <!-- END Nav bar -->
   
   <!-- Banner -->
-  <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center pt-5 ">
+  <div class="w-100 vh-100 d-flex justify-content-center align-items-center pt-5">
     <div class="container profile-container"> 
       <div class="row">
         <!--<div class="col-4 profile-container__icon">
