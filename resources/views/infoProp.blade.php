@@ -108,6 +108,20 @@
                       .dropdown a:hover {background-color: #ddd;}
 
                       .show {display: block;}
+
+
+                      .div-to-display {
+                            display: none;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            border: 1px solid black;
+                            background-color: white;
+                            z-index: 10;
+                        }
+                        .moreInfo:hover > .div-to-display {
+                            display: block
+                        }
                       </style>
 
                       <div class="dropdown">
@@ -338,20 +352,12 @@
 
             <div class="row p-3 profile-container" id="parteBaixo">        
 
-                    <h1>Disponibilidade<h1>
+                    <h1 class="Disponibilidade">Disponibilidade<h1>
                     <div class="container">
     <div class="row">
-        <div id="myDropdown2" class="dropdown-content2">
-            <p class="outro">Hi, {{$user['PrimeiroNome']}}!</p>
-            <a href="/senhorio/home">Home</a>
-            <a href="/propriedade/add">Add Property</a>
-            <a href="">Messages</a>
-            <a href="/senhorio/wallet">Wallet</a>
-            <a href="#">Sign Out</a>
-        </div>
     @for ($i = 0; $i < 12; $i++)
         <div class="col-lg-2 col-md-3 col-xs-6 ">        
-            <div class="box">
+            <div class="box rounded-top">
                 <div class="boxTitle"><h2 align="center" >{{ $data->format('F Y') }}</h2></div>
                 <div id="boxInfo{{$i}}" align="center">
                 <script>
@@ -366,18 +372,11 @@
                         <script>
                         document.getElementById("boxInfo{{$i}}").innerHTML =
                         "<h3>Alugado</h3>" +
-                        "<a onmouseover='mouseOverInfo({{$i}})' href=''><h3>+info</h3></a>"
-                        function mouseOverInfo(){
-                          var dropdowns = document.getElementsByClassName("dropdown-content2");
-                          var i;
-                          for (i = 0; i < dropdowns.length; i++) {
-                            var openDropdown = dropdowns[i];
-                            if (openDropdown.classList.contains('show')) {
-                              openDropdown.classList.remove('show');
-                            }
-                          }
+                        "<a href=#Disponibilidade><h3 class='moreInfo'>+info" +
+                        '<div class="div-to-display"><h3>InquilinoId: {{$arrendamento['IdInquilino']}}</h3>'+
+                        '</div></h3></a>'
                         
-                        }
+
                         </script>                      
                             @php
                             $totalPago = 0;

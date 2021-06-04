@@ -36,7 +36,6 @@
         /* The width is the width of the web page */
       }
     </style>
-      <title>jQuery UI Slider - Range slider</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -285,7 +284,7 @@
                 
 
                 <div class="form-group col-md-2">                   
-                <label for="idades">Idades:</label>
+                <label for="idades">Age Range:</label>
                 <input type="text" id="idades" class="form-control" readonly>  
                 <div id="slider-range"></div>
                 </div>
