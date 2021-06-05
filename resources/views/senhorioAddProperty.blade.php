@@ -174,8 +174,8 @@
   <!-- END Nav bar -->
 
 <!-- Banner -->
-<div class="d-flex justify-content-center align-items-center pt-5">
-    <div class="container profile-container m-5">
+<div class="main">
+    <div class="container profile-container py-3">
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>
         </div>
@@ -200,8 +200,8 @@
                         <option>Casa</option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
+                </div> <br>
+                <div class="row mt-1">
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-6">
@@ -211,9 +211,10 @@
                     <div class="form-group col-md-4">
                         <br>
                         <button type="button" class="btn btn-primary" id="geocodeSubmit">Confirmar</button>
-                    </div>  
+                    </div> 
+                    
                 </div>       
-                <div class="row">
+                <div class="row mt-1">
                     <div class="form-group col-md-2">
                         
                     </div>
@@ -231,6 +232,7 @@
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-8">
+                        <br>
                         <label for="inputDescricao">Descrição:</label>
                         <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" placeholder="Descrição">
                     </div>
@@ -343,7 +345,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <div class="form-group">
-                            <label for="inputFotos">Inserir Fotos:</label>
+                            <label for="inputFotos"><h2>Inserir Fotos:</h2></label>
                             <input type="file" class="form-control-file" id="inputFotos" name="inputFotos[]" multiple>
                         </div>
                     </div>
@@ -353,7 +355,7 @@
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-8">
-                        <div id="map"></div>
+                        <div class="profile-container" id="map"></div>
                     </div>
                 </div>
                 <br>
@@ -361,7 +363,7 @@
                     <div class="form-group col-md-5">
                     </div>
                     <div class="form-group col-md-6">
-                        <button type="submit" class="btn btn-primary btn-lg">Criar Propriedade</button>
+                        <button type="submit" class="btn-lg btn-primary">Criar Propriedade</button>
                     </div>
                 </div>
             </form>

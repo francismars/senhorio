@@ -149,10 +149,10 @@
   </nav>
   <!-- END Nav bar -->
     
-    <div class="banner-image d-flex justify-content-center align-items-center pt-5">
-        <div class="container profile-container m-5">
+    <div class="main">
+        <div class="container profile-container">
             <div class="row p-3 profile-container" id="parteCima">
-                <div class="col align-middle" id="dataCasa">
+                <div class="col-md col-md-push" id="dataCasa">
                     <div class="row d-flex justify-content-center" id="dataCasa__imagens">
                         <img class="img-fluid mt-2" id="imgCasa" src="/img/room1.jpg"
                             style="max-width: 700px; width:100%;  border-radius: 50px !important;">

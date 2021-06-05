@@ -136,7 +136,7 @@
   <!-- END Nav bar -->
 
     <!-- Profile -->
-    <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center pt-5 ">
+    <div class="main">
         <div>
             <div class="wallet-container text-center">
             <p class="page-title"><h2 class="font-effect__blue">MyUniRent Wallet</h2><i class="fa fa-user"></i></p>
@@ -146,7 +146,6 @@
                 <img src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw" alt="wallet">
                 <p class="font-effect__blue p-2">Total Balance</p>
                 <p class="amount">{{ $info['Saldo'] }} €</p>
-               
             </div>
             
             <div class="btn-group text-center" id="popupBotao">

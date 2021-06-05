@@ -153,10 +153,10 @@
   <!-- END Nav bar -->
 
     <!-- Banner -->
-    <div class="d-flex justify-content-center align-items-center pt-5">
-        <div class="container profile-container mt-5  ">
+    <div class="main">
+        <div class="container profile-container py-3">
             <div class="content text-center">
-                <h1>Fatura de Arrendamento</h1>
+                <h1 class="font-effect__blue">Fatura de Arrendamento</h1>
                 <br>
                 <h2>Mês de Aluguer:</h2>
                 <p>{{$arrendamento['MesContrato']}}</p>
@@ -184,9 +184,14 @@
                 <p>Pago <b>{{$pagamento['Valor']}}€</b> em <b>{{$pagamento['Data']}}</b></p>
                 @endforeach
                 <br>
-                <h3>Total: <b>{{$totalPago}}€</b></h3>
-                <h3>Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
-                <button type="submit" class="mt-3 btn btn-primary">Exportar para PDF</button>
+                <h3 class="profile-container__searchOptions p-2"><b>Total:</b> {{$totalPago}}€</h3>
+                <h3 class="profile-container__searchOptions p-2"><b>Valor em falta:</b> {{$property['Preco'] - $totalPago}}€</h3>
+                <script>
+                  function printFunction() {
+                    window.print();
+                  }
+                </script>
+                <button type="submit" class="mt-3 btn btn-primary" onclick="printFunction()">Exportar para PDF</button>
             </div>
         </div>
     </div>

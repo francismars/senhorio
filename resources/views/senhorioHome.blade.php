@@ -45,7 +45,6 @@
 
                     <style>
                       .dropbtn {
-                        
                         background: url('/img/{{$user['imagem']}}') no-repeat;
                         background-size: 50px 50px;
                         color: white;
@@ -54,7 +53,6 @@
                         cursor: pointer;
                         border-radius: 50%;
                         padding: 25px 25px;
-                        
                       }
 
                       .dropbtn:hover, .dropbtn:focus {
@@ -143,7 +141,7 @@
   <!-- END Nav bar -->
   
   <!-- Banner -->
-  <div class="w-100 vh-100 d-flex justify-content-center align-items-center pt-5">
+  <div class="main">
     <div class="container profile-container"> 
       <div class="row">
         <!--<div class="col-4 profile-container__icon">
@@ -151,8 +149,7 @@
         </div>-->
 
         <!-- Cartão do gajo-->
-        
-        <div class="col-3 pt-2">
+        <div class="col-md-3 col-md-push-3">
             <div class="single_advisor_profile m-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <!-- <div class="advisor_thumb"><img src="/img/blankProfileImg.png" alt="img profile"> -->
@@ -172,7 +169,7 @@
                             <button type="submit" class="btn btn-primary mt-2">Submit</button>
               </form>
               </div>
-          </div>
+        </div>
           <script>
             var data = new FormData();
             jQuery.each(jQuery('#file')[0].files, function(i, file) {
@@ -202,13 +199,10 @@
             });
             });
             </script>
-        <div class="col-9 pt-2">
+        <div class="pt-2 col-md-9 col-md-push-9">
+        
           <div class="row">
-            <div class="col">
-            </div>
-          </div>
-          <div class="row">
-          <div class="col profile-container__information">
+          <div class="col mt-4 mb-4 profile-container__information">
 
 
               <form action="/utilizador/edit/{{ $user['IdUser'] }}" method="POST" id="formPerfil">
@@ -599,7 +593,7 @@
                         @foreach ($propriedadesPag as $propriedade)
                           <div class="col-sm-3">
                             <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
-                              <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
+                              <h2 class="blue-font-link">{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h2>
                             </a>
                             <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
                             <p>{{ $propriedade['Descricao'] }}</p>
