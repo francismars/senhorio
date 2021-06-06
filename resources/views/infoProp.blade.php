@@ -184,9 +184,6 @@
                             <h3>
                             </h3>
                         </div>
-                            <script>
-                            console.log("oi" + {{$avgStar}});
-                            </script>
                             @if ($avgStar!="")
                                 <div class="star-icon d-flex justify-content-center">
                                     <label >Rating: </label> <h3 id="totalAVGrating"></h3>

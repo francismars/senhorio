@@ -9,10 +9,14 @@ use App\Models\HistoricoSaldo;
 use Carbon\Carbon;
 use App\Models\Arrendamento;
 use App\Models\Pagamentos;
+use App\Models\Messages;
+use App\Models\Notifications;
 
 class SenhoriosController extends Controller
 {
     private $model;
+
+
 
     public function updateUtilizador(Request $req, $id)
     {
@@ -66,6 +70,51 @@ class SenhoriosController extends Controller
         return response()->json('Updated successfully.');
     }
 
+    public function chat(){
+        $id = '1';
+        $user = Utilizadores::find($id);
+        return view('chat',['user'=>$user]);
+    }
+
+    public function searchUserChat($name){
+       $users = Utilizadores::where('UserName','LIKE',"%".$name."%")->orWhere('PrimeiroNome','LIKE',"%".$name."%")->orWhere('UltimoNome','LIKE',"%".$name."%")->get();
+       return response()->json($users);
+    }
+
+    public function getMessages($sender, $receiver){
+        $messages = Messages::where('sender','=',$sender)->where('receiver','=',$receiver)->
+        orWhere('receiver','=',$sender)->where('sender','=',$receiver)->orderBy('id', 'ASC')->get();
+        return response()->json($messages);
+    }
+
+    public function getAllMessages($sender){
+        $messages = Messages::where('sender','=',$sender)
+        ->orWhere('receiver','=',$sender)
+        ->orderBy('id', 'DESC')
+        ->get();
+        return response()->json($messages);
+        //
+    }
+    
+
+    public function getUserInfo($id){
+        $data = Utilizadores::find($id);
+        return response()->json($data);
+        //
+    }
+
+    public function postChatMessage(Request $req){
+        //dd($req->input('sender'), $req->input('receiver'), $req->input('message'));
+        $message = new Messages;
+        $message->sender=$req->input('sender');
+        $message->receiver=$req->input('receiver');
+        $message->message=$req->input('message');
+        $message->time=Carbon::now();
+        $message->save();
+        return response()->json($message);
+    }
+    
+
     public function showWallet()
     {
         $id = '1';
@@ -77,15 +126,22 @@ class SenhoriosController extends Controller
         return view('wallet',['data'=>$user,'user'=>$user2],['data2'=>$userHist]);
     }
 
+    public function markNotificationRead($id)
+    {
+        $notification = Notifications::find($id)->update(['seen' => 1]);;
+        return response()->json(['res'=>$notification]);
+    }
+
     public function senhorioHome(){
         $id = '1';
+        $notifications = Notifications::where('userId', $id)->get();
         $utilizador = Utilizadores::find($id);
         $propriedadesPag = Propriedades::where('IdSenhorio', $id)->paginate(4);
         $propriedades = Propriedades::where('IdSenhorio', $id)->get();
         $dataHoje = Carbon::now();
         $arrendamentos = Arrendamento::all();
         $pagamentos = Pagamentos::all();        
-        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0,'dataHoje'=>$dataHoje,'pagamentos','arrendamentos'=>$arrendamentos,'pagamentos'=>$pagamentos]);
+        return view('senhorioHome',['user'=>$utilizador,'propriedades'=>$propriedades, 'propriedadesPag'=>$propriedadesPag,"disp"=>0,'dataHoje'=>$dataHoje,'pagamentos','arrendamentos'=>$arrendamentos,'pagamentos'=>$pagamentos, 'notifications'=>$notifications]);
     }
 
     public function addSaldo(Request $amount){

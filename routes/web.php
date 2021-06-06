@@ -17,6 +17,17 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('/user/{id}', 'SenhoriosController@getUserInfo');
+
+
+$router->post('/notifications/{id}', 'SenhoriosController@markNotificationRead');
+
+$router->get('/chat', 'SenhoriosController@chat');
+$router->get('/chat/searchUser/{name}', 'SenhoriosController@searchUserChat');
+$router->post('/chat/message/', 'SenhoriosController@postChatMessage');
+$router->get('/chat/messages/{sender}', 'SenhoriosController@getAllMessages');
+$router->get('/chat/messages/{sender}/{receiver}', 'SenhoriosController@getMessages');
+
 $router->post('/utilizador/edit/{id}', 'SenhoriosController@updateUtilizador');
 $router->post('/utilizador/edit/profilePic/{id}', 'SenhoriosController@storeProfileImg');
 
