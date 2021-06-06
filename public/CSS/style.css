@@ -913,11 +913,11 @@ label{
       text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.658);
       background-size: 50px 50px;
       color: rgb(0, 0, 0);
-      font-size: 16px;
+      font-size: 20px;
       border: none;
       cursor: pointer;
       border-radius: 50%;
-      padding: 12px 15px;
+      padding: 10px 13px;
     }
 
     .dropbtn:hover, .dropbtn:focus {
@@ -1034,4 +1034,14 @@ label{
 
     .moreInfo:hover > .div-to-display {
         display: block
+    }
+
+    .breadcrumb{
+      position: relative;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: #eff7ff;
+      border-radius: 5px;
+      top: 70px;
+      right: 100px;
     }

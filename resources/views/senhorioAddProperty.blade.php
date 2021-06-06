@@ -68,6 +68,13 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
+      <div class="breaddiv" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Property</li>
+        </ol>
+    </div>
       <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
