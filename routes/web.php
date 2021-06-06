@@ -21,6 +21,7 @@ $router->get('/user/{id}', 'SenhoriosController@getUserInfo');
 
 
 $router->post('/notifications/{id}', 'SenhoriosController@markNotificationRead');
+$router->get('/notifications/{id}', 'SenhoriosController@getNotifications');
 
 $router->get('/chat', 'SenhoriosController@chat');
 $router->get('/chat/searchUser/{name}', 'SenhoriosController@searchUserChat');

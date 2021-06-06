@@ -837,6 +837,13 @@ label{
       color: white;
     }
 
+    .notificationTime{
+      position: relative;
+      top: -30px;
+      right: -125px;
+      font-size: 11px;   
+    }
+
     .notificationDropdown {
       right: 0px;
       top: 55px;
@@ -859,7 +866,8 @@ label{
 
     .notification{
       border-bottom: 1px outset rgba(0,0,0,0.2);
-      overflow-x: hidden;
+      overflow: hidden;
+      height: auto;
       
     }
 
@@ -893,6 +901,7 @@ label{
       padding: 0;
       display: inline;
       text-decoration: underline;
+      overflow-y: hidden;
     }
 
     .notificationBody a:hover{
@@ -901,7 +910,7 @@ label{
 
     .dropbtn {
                         
-      text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.363);
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.658);
       background-size: 50px 50px;
       color: rgb(0, 0, 0);
       font-size: 16px;
@@ -949,8 +958,7 @@ label{
       text-align: right;
       margin: 0px;
     }
-
-    
+   
 
     .dropdown a:hover {background-color: #ddd;}
 
@@ -1014,3 +1022,16 @@ label{
       background-color: rgba(0, 82, 189, 0.055);
     }
 
+    .div-to-display {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid black;
+      background-color: white;
+      z-index: 10;
+    }
+
+    .moreInfo:hover > .div-to-display {
+        display: block
+    }

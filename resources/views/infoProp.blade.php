@@ -23,6 +23,7 @@
     </script>
     <script src="/JS/scripts.js"></script>
     <script src="/JS/mapsAPI.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -37,100 +38,25 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
-
-                    <style>
-                      .dropbtn {
-                        
-                        background: url('/img/{{$user['imagem']}}') no-repeat;
-                        background-size: 50px 50px;
-                        color: white;
-                        font-size: 16px;
-                        border: none;
-                        cursor: pointer;
-                        border-radius: 50%;
-                        padding: 25px 25px;
-                        
-                      }
-
-                      .dropbtn:hover, .dropbtn:focus {
-                        background-color: #2980B9;
-                      }
-
-                      .dropdown {
-                        position: relative;
-                        
-                        display: inline-block;
-                      }
-
-                      .dropdown-content {
-                        right: 0px;
-                        top: 55px;
-                        display: none;
-                        position: absolute;
-                        background-color: #f1f1f1;
-                        min-width: 160px;
-                        overflow: auto;
-                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                        z-index: 1;
-                      }
-
-                      .dropdown-content2 {
-                        right: 0px;
-                        top: 55px;
-                        display: none;
-                        position: absolute;
-                        background-color: #f1f1f1;
-                        min-width: 160px;
-                        overflow: auto;
-                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                        z-index: 1;
-                      }
-
-                      .dropdown-content a {
-                        color: black;
-                        padding: 12px 16px;
-                        text-decoration: none;
-                        display: block;
-                      }
-
-                      .outro {
-                        color: black;
-                        padding: 12px 16px;
-                        text-decoration: none;
-                        display: block;
-                        border-bottom: 1px outset rgba(0,0,0,0.2);
-                        text-align: right;
-                        margin: 0px;
-                      }
-
-                      
-
-                      .dropdown a:hover {background-color: #ddd;}
-
-                      .show {display: block;}
-
-
-                      .div-to-display {
-                            display: none;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            border: 1px solid black;
-                            background-color: white;
-                            z-index: 10;
-                        }
-                        .moreInfo:hover > .div-to-display {
-                            display: block
-                        }
-                      </style>
-
                       <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"></button>
+                        <button class="notificationsButton notificationsEvent notificationMouseOver" onclick="notificationFunction()" id="dropNotifButton">
+                          <span><i class="bell fa fa-bell-o notificationsEvent"></i></span>
+                          <span class="badge notificationsEvent notificationMouseOver" id="countNoti"></span>
+                        </button>                        
+                        <div id="notificationDropdown" class="notificationDropdown">
+                          <p class="outro">Notifications</p>
+                          <div id="notificationsBody">                         
+                          </div>                         
+                        </div>
+                      </div>
+                      <div class="dropdown">
+                        <button onclick="myFunction()" id="dropbtn" class="dropbtn mx-2">{{substr($user['PrimeiroNome'], 0,1) . substr($user['UltimoNome'], 0,1)}}</button>
+                        <script>document.getElementById("dropbtn").style.backgroundImage = `url("/img/{{$user['imagem']}}")`</script>
                         <div id="myDropdown" class="dropdown-content">
-                          <p class="outro">Hi, {{$user['PrimeiroNome']}}!</p>
+                          <p class="outro">Hi, {{$user['Username']}}!</p>
                           <a href="/senhorio/home">Home</a>
-                          <a href="/propriedade/add">Add Property</a>
-                          <a href="">Messages</a>
+                          <a href="/propriedade/add" >Add Property</a>
+                          <a href="/chat">Messages</a>
                           <a href="/senhorio/wallet">Wallet</a>
                           <a href="#">Sign Out</a>
                         </div>
@@ -142,9 +68,75 @@
                       function myFunction() {
                         document.getElementById("myDropdown").classList.toggle("show");
                       }
+                      function notificationFunction() {
+                        document.getElementById("notificationDropdown").classList.toggle("show");
+                      }
+
+                      function markAsRead(id){
+                        $.post("/notifications/"+id, function(data, status){
+                          //console.log("Data: " + data + "\nStatus: " + status);
+                          if (status=="success"){
+                            console.log("Marcou")
+                          }
+                          else{
+                            console.log("Something went wrong")
+                          }
+                        });
+                      }
+                      
+                      setInterval(function(){
+                        $.get("/notifications/"+{{$user['IdUser']}}, function(data, status){
+                                if (status=="success"){
+                                  document.getElementById("notificationsBody").innerHTML = ""
+                                      let counter = 0;
+                                      for(i in data[0]){
+                                        if (data[0][i]['seen']=="0"){
+                                          counter +=1;
+                     
+                                          if (data[0][i]['type']=='message'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " from <a href=/chat?idChat="+data[0][i]['sentBy']+">user "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }
+                                          if (data[0][i]['type']=='booking' || data[0][i]['type']=='payment'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " in <a href=/propriedade/"+data[0][i]['sentBy']+">property "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }                                                
+                                            
+                                        }
+                                      }
+                                      document.getElementById("countNoti").innerHTML = counter==0 ? "": counter;
+                                      document.getElementById("notificationsBody").innerHTML += counter==0 ? 
+                                      "<div class=notification><div class='notificationTitle pt-1'>No notifications</div></div>": "";
+                                    }
+                                else{
+                                    console.log("Something Went Wrong")
+                                }                            
+                              });                     
+                            }, 1000);
 
                       // Close the dropdown if the user clicks outside of it
                       window.onclick = function(event) {
+                        console.log(event.target)
                         if (!event.target.matches('.dropbtn')) {
                           var dropdowns = document.getElementsByClassName("dropdown-content");
                           var i;
@@ -155,7 +147,14 @@
                             }
                           }
                         }
-                      }
+                        if (!event.target.matches('.notificationsEvent') && (!event.target.matches('.notificationDropdown'))){
+                          var dropdown = document.getElementById("notificationDropdown");                          
+                          if (dropdown.classList.contains('show')) {
+                            dropdown.classList.toggle("show");
+                            }
+                          
+                        }
+                     }
                       </script>        
         </ul>
       </div>

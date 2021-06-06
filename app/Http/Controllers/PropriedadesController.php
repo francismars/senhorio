@@ -75,7 +75,7 @@ class PropriedadesController extends Controller
     }
 
     public function getPropriedadeEdit($id){
-        $idUser = '2';
+        $idUser = '1';
         $utilizador = Utilizadores::find($idUser);
         $propriedade = Propriedades::find($id);
         return view('editProp',compact('propriedade'),['user'=>$utilizador]);

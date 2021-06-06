@@ -8,7 +8,6 @@
   <meta charset="UTF-8">
   <meta name="author" content="UniRent">
   <title>Home | UniRent</title>
-  <link rel="shortcut icon" type="image/jpg" href="img/logo/UniRent-V2.png"/>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -43,46 +42,15 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
-          <?php
-            $count = 0;
-            foreach ($notifications as $notification){
-              if ($notification['seen']==0){
-                $count++;
-              }
-            }
-            ?>
-                        
-
                       <div class="dropdown">
                         <button class="notificationsButton notificationsEvent notificationMouseOver" onclick="notificationFunction()" id="dropNotifButton">
                           <span><i class="bell fa fa-bell-o notificationsEvent"></i></span>
-                          <span class="badge notificationsEvent notificationMouseOver" id="countNoti">{{$count}}</span>
+                          <span class="badge notificationsEvent notificationMouseOver" id="countNoti"></span>
                         </button>                        
                         <div id="notificationDropdown" class="notificationDropdown">
                           <p class="outro">Notifications</p>
-
-                          @foreach ($notifications as $notification)
-                            @if ($notification['seen']==0)
-                          <div class="notification">
-                            <div class="notificationTitle">
-                              <p>New {{($notification['type'])}}</p>
-                              <button class="notificationButton" onclick=markAsRead({{$notification['id']}})>
-                               <i class="fa fa-check" aria-hidden="true"></i></button>
-                            </div>
-                            <div class="notificationBody">
-                            <p>You got a {{($notification['type'])}}
-                              @if ($notification['type']=='message')
-                                 from <a href="/chat?idChat={{($notification['sentBy'])}}">user {{($notification['sentBy'])}}</a></p>
-                              @endif
-                              @if ($notification['type']=='booking' || $notification['type']=='payment')
-                                 in <a href="/propriedade/{{($notification['sentBy'])}}">property {{($notification['sentBy'])}}</a></p>
-                              @endif                              
-                            </div>
-                          </div>
-                          @endif
-                          @endforeach
-
-                          
+                          <div id="notificationsBody">                         
+                          </div>                         
                         </div>
                       </div>
                       <div class="dropdown">
@@ -110,20 +78,69 @@
 
                       function markAsRead(id){
                         $.post("/notifications/"+id, function(data, status){
-                                  //console.log("Data: " + data + "\nStatus: " + status);
-                                  if (status=="success"){
-                                    console.log("Marcou")
-                                  }
-                                  else{
-                                    console.log("Something went wrong")
-                                  }
-                                });
-                              }
+                          //console.log("Data: " + data + "\nStatus: " + status);
+                          if (status=="success"){
+                            console.log("Marcou")
+                          }
+                          else{
+                            console.log("Something went wrong")
+                          }
+                        });
+                      }
                       
+                      setInterval(function(){
+                        $.get("/notifications/"+{{$user['IdUser']}}, function(data, status){
+                                if (status=="success"){
+                                  document.getElementById("notificationsBody").innerHTML = ""
+                                      let counter = 0;
+                                      for(i in data[0]){
+                                        if (data[0][i]['seen']=="0"){
+                                          counter +=1;
+                     
+                                          if (data[0][i]['type']=='message'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " from <a href=/chat?idChat="+data[0][i]['sentBy']+">user "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }
+                                          if (data[0][i]['type']=='booking' || data[0][i]['type']=='payment'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " in <a href=/propriedade/"+data[0][i]['sentBy']+">property "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }                                                
+                                            
+                                        }
+                                      }
+                                      document.getElementById("countNoti").innerHTML = counter==0 ? "": counter;
+                                      document.getElementById("notificationsBody").innerHTML += counter==0 ? 
+                                      "<div class=notification><div class='notificationTitle pt-1'>No notifications</div></div>": "";
+                                    }
+                                else{
+                                    console.log("Something Went Wrong")
+                                }                            
+                              });                     
+                            }, 1000);
 
                       // Close the dropdown if the user clicks outside of it
                       window.onclick = function(event) {
-                        
+                        console.log(event.target)
                         if (!event.target.matches('.dropbtn')) {
                           var dropdowns = document.getElementsByClassName("dropdown-content");
                           var i;
@@ -134,7 +151,7 @@
                             }
                           }
                         }
-                        if (!event.target.matches('.notificationsEvent')) {
+                        if (!event.target.matches('.notificationsEvent') && (!event.target.matches('.notificationDropdown'))){
                           var dropdown = document.getElementById("notificationDropdown");                          
                           if (dropdown.classList.contains('show')) {
                             dropdown.classList.toggle("show");
@@ -530,7 +547,7 @@
                         </select>
                         <script>
                         escolha = (document.getElementById('country').value = "{{$user['Nacionalidade']}}");
-                        console.log(escolha);
+                        //console.log(escolha);
                         escolha.selected = true;
                         </script>
                       </div>
@@ -655,7 +672,7 @@
                             "<td>{{ $totalPago }}€</td>" +
                             "<td>{{ $propriedade['Preco'] - $totalPago }}€</td>" +
                             "<td>{{ $arrendamento['IdInquilino']}}</td>" +
-                            "<td><a href=''>Contactar Inquilino</a></td></tr></table>"                        
+                            "<td><a href='/chat?idChat={{ $arrendamento['IdInquilino']}}'>Contactar</a></td></tr></table>"                        
                             </script>
                             @endif
                           @endif

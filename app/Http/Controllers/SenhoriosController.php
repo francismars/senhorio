@@ -132,6 +132,12 @@ class SenhoriosController extends Controller
         return response()->json(['res'=>$notification]);
     }
 
+    public function getNotifications($id)
+    {
+        $notifications = Notifications::where('userId', $id)->get();
+        return response()->json([$notifications]);
+    }
+
     public function senhorioHome(){
         $id = '1';
         $notifications = Notifications::where('userId', $id)->get();

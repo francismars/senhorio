@@ -27,6 +27,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -37,22 +38,130 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
-      <div class="navbar" id="navbarNav">
+      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
-                        
-                        <button onclick="myFunction()" id="dropbtn" class="dropbtn"></button>
+                        <button class="notificationsButton notificationsEvent notificationMouseOver" onclick="notificationFunction()" id="dropNotifButton">
+                          <span><i class="bell fa fa-bell-o notificationsEvent"></i></span>
+                          <span class="badge notificationsEvent notificationMouseOver" id="countNoti"></span>
+                        </button>                        
+                        <div id="notificationDropdown" class="notificationDropdown">
+                          <p class="outro">Notifications</p>
+                          <div id="notificationsBody">                         
+                          </div>                         
+                        </div>
+                      </div>
+                      <div class="dropdown">
+                        <button onclick="myFunction()" id="dropbtn" class="dropbtn mx-2">{{substr($user['PrimeiroNome'], 0,1) . substr($user['UltimoNome'], 0,1)}}</button>
                         <script>document.getElementById("dropbtn").style.backgroundImage = `url("/img/{{$user['imagem']}}")`</script>
                         <div id="myDropdown" class="dropdown-content">
-                          <p class="outro">Hi, {{$user['PrimeiroNome']}}!</p>
+                          <p class="outro">Hi, {{$user['Username']}}!</p>
                           <a href="/senhorio/home">Home</a>
-                          <a href="/propriedade/add">Add Property</a>
-                          <a href="">Messages</a>
+                          <a href="/propriedade/add" >Add Property</a>
+                          <a href="/chat">Messages</a>
                           <a href="/senhorio/wallet">Wallet</a>
                           <a href="#">Sign Out</a>
                         </div>
-                      </div>     
+                      </div>
+
+                      <script>
+                      /* When the user clicks on the button, 
+                      toggle between hiding and showing the dropdown content */
+                      function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                      }
+                      function notificationFunction() {
+                        document.getElementById("notificationDropdown").classList.toggle("show");
+                      }
+
+                      function markAsRead(id){
+                        $.post("/notifications/"+id, function(data, status){
+                          //console.log("Data: " + data + "\nStatus: " + status);
+                          if (status=="success"){
+                            console.log("Marcou")
+                          }
+                          else{
+                            console.log("Something went wrong")
+                          }
+                        });
+                      }
+                      
+                      setInterval(function(){
+                        $.get("/notifications/"+{{$user['IdUser']}}, function(data, status){
+                                if (status=="success"){
+                                  document.getElementById("notificationsBody").innerHTML = ""
+                                      let counter = 0;
+                                      for(i in data[0]){
+                                        if (data[0][i]['seen']=="0"){
+                                          counter +=1;
+                     
+                                          if (data[0][i]['type']=='message'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " from <a href=/chat?idChat="+data[0][i]['sentBy']+">user "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }
+                                          if (data[0][i]['type']=='booking' || data[0][i]['type']=='payment'){
+                                            document.getElementById("notificationsBody").innerHTML +=
+                                            "<div class=notification>" +
+                                            "<div class=notificationTitle>" +
+                                              "<p>New "+data[0][i]['type']+"</p>" +
+                                              "<button class=notificationButton onclick=markAsRead("+data[0][i]['id']+")> "+
+                                              "<i class='fa fa-check' aria-hidden=true></i></button>" +
+                                            "</div>" +
+                                            "<div class=notificationBody>" +
+                                            "<p>You got a "+data[0][i]['type'] +
+                                            " in <a href=/propriedade/"+data[0][i]['sentBy']+">property "+data[0][i]['sentBy']+"</a></p>"+
+                                            "<div class='notificationTime'>"+data[0][i]['date'].split(" ")[1].substring(0, 5);+"</div>" +
+                                            "</div></div>"
+                                          }                                                
+                                            
+                                        }
+                                      }
+                                      document.getElementById("countNoti").innerHTML = counter==0 ? "": counter;
+                                      document.getElementById("notificationsBody").innerHTML += counter==0 ? 
+                                      "<div class=notification><div class='notificationTitle pt-1'>No notifications</div></div>": "";
+                                    }
+                                else{
+                                    console.log("Something Went Wrong")
+                                }                            
+                              });                     
+                            }, 1000);
+
+                      // Close the dropdown if the user clicks outside of it
+                      window.onclick = function(event) {
+                        console.log(event.target)
+                        if (!event.target.matches('.dropbtn')) {
+                          var dropdowns = document.getElementsByClassName("dropdown-content");
+                          var i;
+                          for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                              openDropdown.classList.remove('show');
+                            }
+                          }
+                        }
+                        if (!event.target.matches('.notificationsEvent') && (!event.target.matches('.notificationDropdown'))){
+                          var dropdown = document.getElementById("notificationDropdown");                          
+                          if (dropdown.classList.contains('show')) {
+                            dropdown.classList.toggle("show");
+                            }
+                          
+                        }
+                     }
+                      </script>        
         </ul>
       </div>
     </div>
