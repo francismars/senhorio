@@ -38,17 +38,7 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Chat</li>
-        </ol>
-    </div>
-      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
@@ -176,36 +166,43 @@
   <!-- END Nav bar -->
 
     <!-- Banner -->
-    <div class="d-flex justify-content-center align-items-center pt-5">
-      <div class="container profile-container mt-5  ">
+    <div class="main">
+      <div class="container profile-container p-2 mt-5  ">
+      <div class="breaddiv" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Chat</li>
+        </ol>
+      </div>
         <div class="content text-center">
-          <div id="chat-geral" class="border row" style="height: 400px">
-            <div id="leftArea" class="border col">
-              <div id="searchbar" class="border d-flex justify-content-center align-items-center">
+          <div id="chat-geral" class=" row" style="">
+            <div id="leftArea" class=" col m-2">
+              <div id="searchbar" class=" d-flex justify-content-center align-items-center p-3">
               <label for="name">Search for User:</label>
               <input type="text" id="nameSearch" name="nameSearch" required
                     minlength="3" maxlength="20" size="10" oninput="searchFunction({{$user['IdUser']}})">
               <button id="seachUser" onclick="clearSearch({{$user['IdUser']}})">Clear</button>
               </div>
-              <div id="userList" class="border" style="height: 370px">
+              <div id="userList" class="" style="height: 370px">
                 <div class="border p-1 d-flex justify-content-center align-items-center" id="userListheader">
                   Previous Messages:
                 </div>
-                <div id="userListbody">
+                <div id="userListbody" class="p-2">
                   
                 </div>
               </div>
             </div>
-            <div id="rightArea" class="border col-8">
-              <div id="chatText" class="border" style="height: 370px">
+            <div id="rightArea" class="col">
+              <div id="chatText" class="" style="">
               <div id="chatTextHeader" class="border">
-                talking to:
+                <h2 class="m-2">Talking to:</h2>
               </div>
-              <div id="chatTextBody" class="border" style="height: 340px">
-                chat
+              <div id="chatTextBody" class="" style="height: 340px">
+                <h3>No one</h3>
               </div>
               </div>
-              <div id="sendText" class="border">
+              <div id="sendText" class="">
 
               </div>
               </div>

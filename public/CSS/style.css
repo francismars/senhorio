@@ -27,6 +27,13 @@ h3 {
   --main-light-blue: rgba(24, 144, 255, 1);
 }
 
+.main{
+  margin-top: 110px !important;
+  margin-bottom: 10px !important;
+  margin-right: 10px !important;
+  margin-left: 10px !important;
+}
+
 .navbarPropInfo{
   background-color: rgba(0, 133, 255, 0.19) !important;
 }
@@ -95,8 +102,6 @@ h3 {
 }
 
 .profile-container {
-  margin: 35px !important;
-  padding: 15px !important;
   border-radius: 10px !important;
   background-color: #f8f8f89c !important;
   -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
@@ -339,16 +344,16 @@ h3 {
 /* Wallet Style */
 .wallet-container {
   background-color: rgb(232 242 251);
-		width: 320px;
-		color: rgb(0, 0, 0);
-		font-size: 15px;
-		padding: 20px 20px 0;
-		top: 55%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		position: absolute;
-    border-radius: 10px;
-    border: 4px solid white;
+  min-width: 320px;
+  color: rgb(0, 0, 0);
+  font-size: 15px;
+  padding: 20px 20px 0;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  border-radius: 10px;
+  border: 4px solid white;
 }
 
 .page-title {
@@ -419,15 +424,6 @@ h3 {
 
 .footer-menu p {
 	font-size: 12px;
-}
-
-@media screen and (max-width: 800px){
-  .wallet-container {
-    height: 115%;
-    bottom: 20px;
-    margin-top: 100px;
-  }
-
 }
 
 
@@ -545,18 +541,16 @@ h3 {
 
     /* PAGINA PAGAMENTOS */
 
-    /**************/
-/*** CUSTOM ***/
-/******
-.banner-image {
-  background: rgba(0, 133, 255, 0.19);
-  mix-blend-mode: normal;
-}********/
 
 .blue-font {
   color: var(--main-dark-blue) !important;
   font-weight: bold;
   font-size: 70px !important;
+}
+
+.blue-font-link{
+  color: var(--main-dark-blue) !important;
+  font-weight: bold;
 }
 
 #forgot-psswd {
@@ -581,24 +575,7 @@ h3 {
           transform: translateY(-3px);
 }
 
-.profile-container {
-  margin: 35px !important;
-  padding: 15px !important;
-  border-radius: 10px !important;
-  background-color: #f8f8f89c !important;
-  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
-          box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
-}
 
-.profile-container__information {
-  margin-right: 20px;
-  margin-bottom: 5px;
-  padding: 15px !important;
-  border-radius: 10px !important;
-  background-color: white !important;
-  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
-          box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
-}
   /* Set the size of the div element that contains the map */
 #map {
   height: 400px;
@@ -1037,11 +1014,9 @@ label{
     }
 
     .breadcrumb{
+      max-width: 500px;
       position: relative;
-      padding-left: 10px;
-      padding-right: 10px;
+      margin-top: 3px;
       background-color: #eff7ff;
       border-radius: 5px;
-      top: 70px;
-      right: 100px;
     }

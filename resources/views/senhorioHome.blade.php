@@ -36,16 +36,7 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-        </ol>
-    </div>
-      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
@@ -173,16 +164,19 @@
   <!-- END Nav bar -->
   
   <!-- Banner -->
-  <div class="w-100 vh-100 d-flex justify-content-center align-items-center pt-5">
-    <div class="container profile-container"> 
+  <div class="main">
+    <div class="container profile-container">
+      <div class="breaddiv pt-2" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page"></li>
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+      </div>
       <div class="row">
-        <!--<div class="col-4 profile-container__icon">
-          <img class="m-3" src="img/logo/UniRent-V2.png" alt="" width="100">
-        </div>-->
-
-        <!-- Cartão do gajo-->
-        
-        <div class="col-3 pt-2">
+      
+        <!-- Cartão do gajo-->  
+        <div class="col-md-3 col-md-push-3">
+            
             <div class="single_advisor_profile m-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <!-- <div class="advisor_thumb"><img src="/img/blankProfileImg.png" alt="img profile"> -->
@@ -232,13 +226,10 @@
             });
             });
             </script>
-        <div class="col-9 pt-2">
+        <div class="pt-2 col-md-9 col-md-push-9">
+          
           <div class="row">
-            <div class="col">
-            </div>
-          </div>
-          <div class="row">
-          <div class="col profile-container__information">
+          <div class="col mt-4 mb-4 profile-container__information">
 
 
               <form action="/utilizador/edit/{{ $user['IdUser'] }}" method="POST" id="formPerfil">
@@ -629,7 +620,7 @@
                         @foreach ($propriedadesPag as $propriedade)
                           <div class="col-sm-3">
                             <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
-                              <h3>{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h3>
+                            <h2 class="blue-font-link">{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h2>
                             </a>
                             <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
                             <p>{{ $propriedade['Descricao'] }}</p>
@@ -643,7 +634,7 @@
                       </div>
                       <div class="tab-pane fade" id="porpagar" >
                       <div class="col">
-                        <div class="w3-container" >
+                        <div class="w3-container table-responsive" >
                           <table class="w3-table-all w3" id="pagamentosatraso">
                             <thead>
                               <tr class="w3-light-grey">
