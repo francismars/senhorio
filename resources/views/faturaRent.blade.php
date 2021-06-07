@@ -46,20 +46,8 @@
     <div class="container">
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
-      </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page">Properties</li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$property['IdPropriedade']}}">{{$property['IdPropriedade']}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Fatura</li>
-        </ol>
-    </div>
-      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      </a>      
+      <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
@@ -116,7 +104,6 @@
                                       for(i in data[0]){
                                         if (data[0][i]['seen']=="0"){
                                           counter +=1;
-                     
                                           if (data[0][i]['type']=='message'){
                                             document.getElementById("notificationsBody").innerHTML +=
                                             "<div class=notification>" +
@@ -178,7 +165,7 @@
                             }
                           
                         }
-                     }
+                      }
                       </script>        
         </ul>
       </div>
@@ -187,10 +174,19 @@
   <!-- END Nav bar -->
 
     <!-- Banner -->
-    <div class="d-flex justify-content-center align-items-center pt-5">
-        <div class="container profile-container mt-5  ">
+    <div class="main">
+        <div class="container profile-container py-3" id="printMe">
             <div class="content text-center">
-                <h1>Fatura de Arrendamento</h1>
+            <div class="breaddiv" aria-label="breadcrumb" id="breaddiv">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Properties</li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$property['IdPropriedade']}}">{{$property['IdPropriedade']}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fatura</li>
+              </ol>
+            </div>
+                <h1 class="font-effect__blue">Fatura de Arrendamento</h1>
                 <br>
                 <h2>Mês de Aluguer:</h2>
                 <p>{{$arrendamento['MesContrato']}}</p>
@@ -218,9 +214,27 @@
                 <p>Pago <b>{{$pagamento['Valor']}}€</b> em <b>{{$pagamento['Data']}}</b></p>
                 @endforeach
                 <br>
-                <h3>Total: <b>{{$totalPago}}€</b></h3>
-                <h3>Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
-                <button type="submit" class="mt-3 btn btn-primary">Exportar para PDF</button>
+                <h3 class="profile-container__searchOptions p-2">Total: <b>{{$totalPago}}€</b></h3>
+                <h3 class="profile-container__searchOptions p-2">Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
+                
+                <script type="text/javascript">
+                  function printFunction(){
+                    var infoTab = document.getElementById("breaddiv")
+                    var hideBtn = document.getElementById("pdfButton")
+                    infoTab.style.display = "none";
+                    hideBtn.style.display = "none";
+                    var print_div = document.getElementById("printMe");
+                    var print_area = window.open();
+                    print_area.document.write(print_div.innerHTML);
+                    print_area.document.close();
+                    print_area.focus();
+                    print_area.print();
+                    infoTab.style.display = "block";
+                    hideBtn.style.display = "inline-block";
+                  }
+                </script>
+                
+                <button type="submit" class="mt-3 btn btn-primary" id="pdfButton" onclick="printFunction()">Exportar para PDF</button>
             </div>
         </div>
     </div>
