@@ -185,7 +185,11 @@
 
     <!-- Banner -->
     <div class="main">
+<<<<<<< HEAD
         <div class="container profile-container py-3" id="printMe">
+=======
+        <div class="container profile-container py-3">
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
             <div class="content text-center">
                 <h1 class="font-effect__blue">Fatura de Arrendamento</h1>
                 <br>
@@ -215,6 +219,7 @@
                 <p>Pago <b>{{$pagamento['Valor']}}€</b> em <b>{{$pagamento['Data']}}</b></p>
                 @endforeach
                 <br>
+<<<<<<< HEAD
                 <h3 class="profile-container__searchOptions p-2">Total: <b>{{$totalPago}}€</b></h3>
                 <h3 class="profile-container__searchOptions p-2">Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
                 
@@ -230,6 +235,15 @@
                   }
                 </script>
                 
+=======
+                <h3 class="profile-container__searchOptions p-2"><b>Total:</b> {{$totalPago}}€</h3>
+                <h3 class="profile-container__searchOptions p-2"><b>Valor em falta:</b> {{$property['Preco'] - $totalPago}}€</h3>
+                <script>
+                  function printFunction() {
+                    window.print();
+                  }
+                </script>
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                 <button type="submit" class="mt-3 btn btn-primary" onclick="printFunction()">Exportar para PDF</button>
             </div>
         </div>

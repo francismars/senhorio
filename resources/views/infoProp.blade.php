@@ -163,6 +163,7 @@
     <div class="main">
         <div class="container profile-container">
             <div class="row p-3 profile-container" id="parteCima">
+<<<<<<< HEAD
                 <div class="breaddiv" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page"></li>
@@ -171,6 +172,8 @@
                     <li class="breadcrumb-item active" aria-current="page">{{$property[0]['IdPropriedade']}}</li>
                     </ol>
                 </div>
+=======
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                 <div class="col-md col-md-push" id="dataCasa">
                     <div class="row d-flex justify-content-center" id="dataCasa__imagens">
                         <img class="img-fluid mt-2" id="imgCasa" src="/img/room1.jpg"

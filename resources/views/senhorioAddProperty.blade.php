@@ -198,6 +198,7 @@
 <!-- Banner -->
 <div class="main">
     <div class="container profile-container py-3">
+<<<<<<< HEAD
       <div class="breaddiv" aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item" aria-current="page"></li>
@@ -205,6 +206,8 @@
         <li class="breadcrumb-item active" aria-current="page">Add Property</li>
         </ol>
       </div>
+=======
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>
         </div>
@@ -229,8 +232,12 @@
                         <option>Casa</option>
                         </select>
                     </div>
+<<<<<<< HEAD
                 </div>
                 <br>
+=======
+                </div> <br>
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                 <div class="row mt-1">
                     <div class="form-group col-md-2">
                     </div>
@@ -241,9 +248,10 @@
                     <div class="form-group col-md-4">
                         <br>
                         <button type="button" class="btn btn-primary" id="geocodeSubmit">Confirmar</button>
-                    </div>  
+                    </div> 
+                    
                 </div>       
-                <div class="row">
+                <div class="row mt-1">
                     <div class="form-group col-md-2">
                         
                     </div>
@@ -261,6 +269,7 @@
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-8">
+                        <br>
                         <label for="inputDescricao">Descrição:</label>
                         <input type="Descrição" class="form-control" id="inputDescricao" name="inputDescricao" placeholder="Descrição" required>
                     </div>
@@ -391,7 +400,7 @@
                     <div class="form-group col-md-5">
                     </div>
                     <div class="form-group col-md-6">
-                        <button type="submit" class="btn btn-primary btn-lg">Criar Propriedade</button>
+                        <button type="submit" class="btn-lg btn-primary">Criar Propriedade</button>
                     </div>
                 </div>
             </form>

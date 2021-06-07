@@ -576,6 +576,15 @@ h3 {
 }
 
 
+<<<<<<< HEAD
+=======
+.profile-container__information {
+  border-radius: 10px !important;
+  background-color: white !important;
+  -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
+          box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05) !important;
+}
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
   /* Set the size of the div element that contains the map */
 #map {
   height: 400px;
@@ -603,6 +612,7 @@ h3 {
   text-decoration-thickness: 0.125em !important;
   text-underline-offset: 1.5px !important;
 }
+
 /*# sourceMappingURL=style.css.map */
 .payment{
   background-color:white;

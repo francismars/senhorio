@@ -39,6 +39,68 @@
         <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
+<<<<<<< HEAD
+=======
+
+                    <style>
+                      .dropbtn {
+                        background: url('/img/{{$user['imagem']}}') no-repeat;
+                        background-size: 50px 50px;
+                        color: white;
+                        font-size: 16px;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 50%;
+                        padding: 25px 25px;
+                      }
+
+                      .dropbtn:hover, .dropbtn:focus {
+                        background-color: #2980B9;
+                      }
+
+                      .dropdown {
+                        position: relative;
+                        
+                        display: inline-block;
+                      }
+
+                      .dropdown-content {
+                        right: 0px;
+                        top: 55px;
+                        display: none;
+                        position: absolute;
+                        background-color: #f1f1f1;
+                        min-width: 160px;
+                        overflow: auto;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                      }
+
+                      .dropdown-content a {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+                      }
+
+                      .outro {
+                        color: black;
+                        padding: 12px 16px;
+                        text-decoration: none;
+                        display: block;
+                        border-bottom: 1px outset rgba(0,0,0,0.2);
+                        text-align: right;
+                        margin: 0px;
+                      }
+
+                      
+
+                      .dropdown a:hover {background-color: #ddd;}
+
+                      .show {display: block;}
+                      </style>
+
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                       <div class="dropdown">
                         <button class="notificationsButton notificationsEvent notificationMouseOver" onclick="notificationFunction()" id="dropNotifButton">
                           <span><i class="bell fa fa-bell-o notificationsEvent"></i></span>
@@ -165,6 +227,7 @@
   
   <!-- Banner -->
   <div class="main">
+<<<<<<< HEAD
     <div class="container profile-container">
       <div class="breaddiv pt-2" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -177,6 +240,16 @@
         <!-- Cartão do gajo-->  
         <div class="col-md-3 col-md-push-3">
             
+=======
+    <div class="container profile-container"> 
+      <div class="row">
+        <!--<div class="col-4 profile-container__icon">
+          <img class="m-3" src="img/logo/UniRent-V2.png" alt="" width="100">
+        </div>-->
+
+        <!-- Cartão do gajo-->
+        <div class="col-md-3 col-md-push-3">
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
             <div class="single_advisor_profile m-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <!-- <div class="advisor_thumb"><img src="/img/blankProfileImg.png" alt="img profile"> -->
@@ -196,7 +269,7 @@
                             <button type="submit" class="btn btn-primary mt-2">Submit</button>
               </form>
               </div>
-          </div>
+        </div>
           <script>
             var data = new FormData();
             jQuery.each(jQuery('#file')[0].files, function(i, file) {
@@ -227,7 +300,11 @@
             });
             </script>
         <div class="pt-2 col-md-9 col-md-push-9">
+<<<<<<< HEAD
           
+=======
+        
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
           <div class="row">
           <div class="col mt-4 mb-4 profile-container__information">
 
@@ -620,7 +697,11 @@
                         @foreach ($propriedadesPag as $propriedade)
                           <div class="col-sm-3">
                             <a href="/propriedade/{{ $propriedade['IdPropriedade'] }}">
+<<<<<<< HEAD
                             <h2 class="blue-font-link">{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h2>
+=======
+                              <h2 class="blue-font-link">{{ $propriedade['TipoPropriedade'] }} em {{ $propriedade['Localizacao'] }}</h2>
+>>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                             </a>
                             <img class="img-thumbnail" src="/img/room1.jpg" alt="img profile" width="150" height="100">
                             <p>{{ $propriedade['Descricao'] }}</p>
