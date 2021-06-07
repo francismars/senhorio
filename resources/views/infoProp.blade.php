@@ -32,18 +32,8 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page">Properties</li>
-        <li class="breadcrumb-item active" aria-current="page">{{$property[0]['IdPropriedade']}}</li>
-        </ol>
-    </div>
-      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+    
+      <div class=" navbar id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
@@ -170,23 +160,31 @@
   </nav>
   <!-- END Nav bar -->
     
-    <div class="banner-image d-flex justify-content-center align-items-center pt-5">
-        <div class="container profile-container m-5">
+    <div class="main">
+        <div class="container profile-container">
             <div class="row p-3 profile-container" id="parteCima">
-                <div class="col align-middle" id="dataCasa">
+                <div class="breaddiv" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Properties</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$property[0]['IdPropriedade']}}</li>
+                    </ol>
+                </div>
+                <div class="col-md col-md-push" id="dataCasa">
                     <div class="row d-flex justify-content-center" id="dataCasa__imagens">
                         <img class="img-fluid mt-2" id="imgCasa" src="/img/room1.jpg"
                             style="max-width: 700px; width:100%;  border-radius: 50px !important;">
                             
                         @foreach($property as $propInfo) 
 
-                        <div class=" px-3 pt-3 profile-container text-center">
-                            <h2>Morada</h2>
+                        <div class=" px-3 pt-3  text-center">
+                            <h2 class="blue-font-link">Morada</h2>
                             <h3 id="morada">
                                 Morada
                             </h3>
-                                <br>
-                            <h2>Preço</h2>
+                                
+                            <h2 class="blue-font-link">Preço</h2>
                             {{$propInfo['Preco']}}€/Mês                      
                             <h3>
                             </h3>
@@ -222,7 +220,7 @@
                         
                     </div>
 
-                    <div class="row infoCasa__Border m-3 profile-container">
+                    <div class="row infoCasa__Border m-3 p-2 profile-container">
                         <div class="form-group col-md-5">
                             <h2>Localização:</h2>
                             <p>{{$propInfo['Localizacao']}}</p>
@@ -347,7 +345,7 @@
                         <h1>Localização</h1>
                     </div>
                     <div class="p-3 d-flex justify-content-center">
-                        <div id="map"></div>
+                        <div class="profile-container" id="map"></div>
 
                         
                     </div>
@@ -436,7 +434,7 @@
         <div class="p-3">
             <h1>Pagamentos em Atraso:</h1>
         </div>
-        <div class="w3-container" >
+        <div class="w3-container table-responsive" >
         <table class="w3-table-all w3-hoverable" id="pagamentosatraso">
                             <thead>
                             <tr class="w3-light-grey">

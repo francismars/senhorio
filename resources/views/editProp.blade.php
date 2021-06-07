@@ -71,19 +71,8 @@
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
       </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page">Properties</li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$propriedade['IdPropriedade']}}">{{$propriedade['IdPropriedade']}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit</li>
-        </ol>
-    </div>
-      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      
+      <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
                       <div class="dropdown">
@@ -211,8 +200,17 @@
 <!-- END Nav bar -->
 
 <!-- Banner -->
-<div class="banner-image d-flex justify-content-center align-items-center pt-5">
-    <div class="container profile-container m-5">
+<div class="main">
+    <div class="container profile-container py-3">
+    <div class="breaddiv" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page">Properties</li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$propriedade['IdPropriedade']}}">{{$propriedade['IdPropriedade']}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </div>
         <div class="content text-center">
         <h1>Editar Propriedade {{$propriedade['IdPropriedade']}}</h1>
         </div>
@@ -405,7 +403,7 @@
                     <div class="form-group col-md-2">
                     </div>
                     <div class="form-group col-md-8">
-                        <div id="map"></div>
+                        <div class="profile-container" id="map"></div>
                     </div>
                 </div>
                 <br>
