@@ -104,6 +104,15 @@ class SenhoriosController extends Controller
     }
 
     public function postChatMessage(Request $req){
+
+        $user = new Notifications();
+        $user->UserId=$req->input('receiver');
+        $user->type="message";
+        $user->seen=0;
+        $user->sentBy=$req->input('sender');
+        $user->date=Carbon::now();
+        $user->save();
+        
         //dd($req->input('sender'), $req->input('receiver'), $req->input('message'));
         $message = new Messages;
         $message->sender=$req->input('sender');

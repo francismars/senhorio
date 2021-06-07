@@ -203,7 +203,6 @@
                 data.append('file-'+i, file);
             });    
             $('#formFotoPerfil').submit(function(e) {
-            alert("ola");
             e.preventDefault();
             req = $.ajax({
               url: $(this).attr('action'),
@@ -574,13 +573,18 @@
                         data: $(this).serialize(),
                         success: function(data) {
                             console.log(data);
+                            if (data=="NIF Invalido"){
+                              alert("NIF Invalido");
+                            }
                         }
                     });
                     
                     req.done(function(data){
                         //$('#totalAVGrating').fadeOut(500).fadeIn(500);
+                        if (data!="NIF Invalido"){
+                          $('.form-group').fadeOut(1000).fadeIn(1000);
+                            }
                         
-                        $('.form-group').fadeOut(1000).fadeIn(1000);
                         // setTimeout(function(){
                         //     $('.amount').text(data.res+" €");
                         // }, 1000);

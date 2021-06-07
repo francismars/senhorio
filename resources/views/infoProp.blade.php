@@ -467,7 +467,7 @@
                             "<td>{{ $totalPago }}€</td>" +
                             "<td>{{ $propInfo['Preco'] - $totalPago }}€</td>" +
                             "<td>{{ $arrendamento['IdInquilino']}}</td>" +
-                            "<td><a href=''>Contactar Inquilino</a></td></tr></table>"                        
+                            "<td><a href='/chat?idChat={{ $arrendamento['IdInquilino']}}'>Contactar Inquilino</a></td></tr></table>"                        
                             </script>
                             @endif
                     @endforeach

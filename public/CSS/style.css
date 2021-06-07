@@ -961,6 +961,10 @@ label{
       border-radius: 0px 15px 15px 0px;
       background-color: rgba(0, 82, 189, 0.055);
     }
+
+    #userList{
+      overflow-y: auto;
+    }
     
     #chatTextBody{
       overflow-y: auto;
