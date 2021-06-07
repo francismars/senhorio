@@ -159,12 +159,8 @@
   <!-- END Nav bar -->
 
     <!-- Profile -->
-<<<<<<< HEAD
     <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center pt-5">
 
-=======
-    <div class="main">
->>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
         <div>
             <div class="wallet-container text-center">
             <div class="breaddiv" aria-label="breadcrumb">

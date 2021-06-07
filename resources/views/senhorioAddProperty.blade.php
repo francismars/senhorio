@@ -198,7 +198,6 @@
 <!-- Banner -->
 <div class="main">
     <div class="container profile-container py-3">
-<<<<<<< HEAD
       <div class="breaddiv" aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item" aria-current="page"></li>
@@ -206,8 +205,6 @@
         <li class="breadcrumb-item active" aria-current="page">Add Property</li>
         </ol>
       </div>
-=======
->>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
         <div class="content text-center">
         <h1>Adicionar Propriedade</h1>
         </div>
@@ -232,12 +229,8 @@
                         <option>Casa</option>
                         </select>
                     </div>
-<<<<<<< HEAD
                 </div>
                 <br>
-=======
-                </div> <br>
->>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
                 <div class="row mt-1">
                     <div class="form-group col-md-2">
                     </div>

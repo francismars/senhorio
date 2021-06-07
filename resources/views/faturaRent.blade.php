@@ -46,17 +46,7 @@
     <div class="container">
       <a class="navbar-brand" href="/senhorio/home">
         <img src="/img/logo/UniRent-V2.png" alt="" width="100">
-      </a>
-      <div class="breaddiv" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page">Properties</li>
-        <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$property['IdPropriedade']}}">{{$property['IdPropriedade']}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Fatura</li>
-        </ol>
-    </div>
-      
+      </a>      
       <div class="navbar" id="navbarNav">
         <div class="mx-auto"></div>
         <ul class="navbar-nav">
@@ -185,12 +175,17 @@
 
     <!-- Banner -->
     <div class="main">
-<<<<<<< HEAD
         <div class="container profile-container py-3" id="printMe">
-=======
-        <div class="container profile-container py-3">
->>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
             <div class="content text-center">
+            <div class="breaddiv" aria-label="breadcrumb" id="breaddiv">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/senhorio/home">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Properties</li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/propriedade/{{$property['IdPropriedade']}}">{{$property['IdPropriedade']}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fatura</li>
+              </ol>
+            </div>
                 <h1 class="font-effect__blue">Fatura de Arrendamento</h1>
                 <br>
                 <h2>Mês de Aluguer:</h2>
@@ -219,32 +214,27 @@
                 <p>Pago <b>{{$pagamento['Valor']}}€</b> em <b>{{$pagamento['Data']}}</b></p>
                 @endforeach
                 <br>
-<<<<<<< HEAD
                 <h3 class="profile-container__searchOptions p-2">Total: <b>{{$totalPago}}€</b></h3>
                 <h3 class="profile-container__searchOptions p-2">Valor em Falta: <b>{{$property['Preco'] - $totalPago}}€</b></h3>
                 
                 <script type="text/javascript">
                   function printFunction(){
+                    var infoTab = document.getElementById("breaddiv")
+                    var hideBtn = document.getElementById("pdfButton")
+                    infoTab.style.display = "none";
+                    hideBtn.style.display = "none";
                     var print_div = document.getElementById("printMe");
                     var print_area = window.open();
                     print_area.document.write(print_div.innerHTML);
                     print_area.document.close();
                     print_area.focus();
                     print_area.print();
-                    //print_area.close();
+                    infoTab.style.display = "block";
+                    hideBtn.style.display = "inline-block";
                   }
                 </script>
                 
-=======
-                <h3 class="profile-container__searchOptions p-2"><b>Total:</b> {{$totalPago}}€</h3>
-                <h3 class="profile-container__searchOptions p-2"><b>Valor em falta:</b> {{$property['Preco'] - $totalPago}}€</h3>
-                <script>
-                  function printFunction() {
-                    window.print();
-                  }
-                </script>
->>>>>>> 8069cb94953bc274c8d044a2aa36d94b1f89837d
-                <button type="submit" class="mt-3 btn btn-primary" onclick="printFunction()">Exportar para PDF</button>
+                <button type="submit" class="mt-3 btn btn-primary" id="pdfButton" onclick="printFunction()">Exportar para PDF</button>
             </div>
         </div>
     </div>
