@@ -162,7 +162,7 @@
     <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center pt-5">
 
         <div>
-            <div class="wallet-container text-center">
+            <div class="wallet-container text-center" id="containerWallet">
             <div class="breaddiv" aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item" aria-current="page"></li>

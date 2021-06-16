@@ -643,7 +643,7 @@
                           <table class="w3-table-all w3" id="pagamentosatraso">
                             <thead>
                               <tr class="w3-light-grey">
-                                <th>Propriety ID</th>
+                                <th>Property ID</th>
                                 <th>Date of Rental</th>
                                 <th>Total Paid</th>
                                 <th>Total Missing</th>

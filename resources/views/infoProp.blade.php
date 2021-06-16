@@ -199,6 +199,14 @@
                                     <i class="fa fa-star" data-rating="2" style="font-size:20px;color:#000000;"></i>
                                     @endfor
                                 </div>
+                            @else 
+                            <div class="star-icon d-flex justify-content-center">
+                            <label >Rating: </label> <h3 id="totalAVGrating"></h3>
+                            @for ($i=0;$i<5;$i++)
+                                
+                                <i class="fa fa-star" data-rating="2" style="font-size:20px;color:#000000;"></i>
+                            @endfor
+                            </div>
                             @endif
                             
                     </div>
@@ -438,11 +446,11 @@
         <table class="w3-table-all w3-hoverable" id="pagamentosatraso">
                             <thead>
                             <tr class="w3-light-grey">
-                                <th>Mes de Contrato</th>
-                                <th>Total Pago</th>
-                                <th>Total em Falta</th>
-                                <th>Inquilino ID</th>
-                                <th>Contactar Inquilino</th>
+                                <th>Mes</th>
+                                <th>Total</th>
+                                <th>Falta</th>
+                                <th>ID</th>
+                                <th>Chat</th>
                             </tr>
                             </thead>      
         </div>
@@ -467,13 +475,15 @@
                             "<td>{{ $totalPago }}€</td>" +
                             "<td>{{ $propInfo['Preco'] - $totalPago }}€</td>" +
                             "<td>{{ $arrendamento['IdInquilino']}}</td>" +
-                            "<td><a href='/chat?idChat={{ $arrendamento['IdInquilino']}}'>Contactar Inquilino</a></td></tr></table>"                        
+                            "<td><a href='/chat?idChat={{ $arrendamento['IdInquilino']}}'>Chat</a></td></tr></table>"                        
                             </script>
                             @endif
                     @endforeach
                    
     </div>
 </div>    
+
+
 </body>
 <script>
     function initMap() {
@@ -502,7 +512,7 @@
         } else {
         window.alert("Geocoder failed due to: " + status);
         }
-    });
+    });  
     }
     
 </script>

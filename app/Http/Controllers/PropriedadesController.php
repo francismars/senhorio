@@ -10,6 +10,7 @@ use App\Models\Arrendamento;
 use App\Models\Indisponivel;
 use App\Models\Utilizadores;
 use App\Models\Pagamentos;
+use App\Models\Locais;
 use Carbon\Carbon;
 
 class PropriedadesController extends Controller
@@ -60,6 +61,9 @@ class PropriedadesController extends Controller
     public function propertyInfo($id)
     {
         $property = Propriedades::where('IdPropriedade', $id)->get();
+        if(count($property)==0){
+            return response()->json("Propriedade nao existe");
+        }
         $arrendamentos = Arrendamento::where('IdPropriedade', $id)->get();
         $indisponiveis = Indisponivel::where('IdPropriedade', $id)->get();
         $avgStar = Rating::where('IdPropriedade', $id)->avg('Rating');
@@ -71,7 +75,8 @@ class PropriedadesController extends Controller
         }
         //return response()->json($avgStar);
         $user = Utilizadores::find('1');
-        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis','pagamentos'),['user'=>$user]);
+        $pontosdeInteresse = Locais::all();
+        return view('infoProp',compact('property','avgStar','data','arrendamentos','indisponiveis','pagamentos', 'pontosdeInteresse'),['user'=>$user]);
     }
 
     public function getPropriedadeEdit($id){
